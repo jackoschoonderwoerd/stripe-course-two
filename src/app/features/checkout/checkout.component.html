@@ -1,0 +1,111 @@
+<div class="page-container">
+    <div class="header">check out</div>
+
+    <div class="customer" *ngIf="(customer$|async) as customer">
+        <div class="customer-header">customer info</div>
+        <div class="full-name">
+            <span class="first-name">{{customer.firstName}}</span>&nbsp;
+            <span class="last-name">{{customer.lastName}}</span>
+        </div>
+        <div class="email">{{customer.email}}</div>
+        <div class="address">
+            <span class="street">{{customer.street}}</span>&nbsp;
+            <span class="house-number">{{customer.houseNumber}}</span>&nbsp;
+            <span *ngIf="customer.addition" class="addition">{{customer.addition}}</span>
+        </div>
+        <div class="city">{{customer.city}}</div>
+        <div class="country">{{customer.country}}</div>
+        <div class="orders">
+            <ul class="orders-list" *ngIf{{customer.orders> 0}}
+                <li class="orders-list-item" *ngFor="let order of customer.orders">
+                    {{order|json}}
+                </li>
+            </ul>
+        </div>
+        <button
+            class="update-customer"
+            (click)="onUpdateCustomer(customer)">
+            {{customer ? 'Update Customer' : 'Add Customer'}}
+        </button>
+    </div>
+
+    <div class="empty" *ngIf="cartItems.length == 0">Your cart is empty</div>
+    <ul class="cart-items">
+        <div class="order-header">order</div>
+        <li class="cart-item" *ngFor="let cartItem of cartItems">
+            <!-- {{cartItem.cdInfo|json}} -->
+            <div class="band-name_title">
+                <div class="band-name">{{cartItem.cd.cdInfo.bandName}}</div>
+                <div class="title">{{cartItem.cd.cdInfo.title}}</div>
+            </div>
+            <div class="price_quantity">
+                <div class="price">{{cartItem.cd.cdInfo.price|currency:'EUR'}}</div>
+                <div class="quantity" *ngIf="cartItem.quantity > 1">Quantity: {{cartItem.quantity|number}}</div>
+            </div>
+            <button class="plus-one" (click)="onPlusOne(cartItem.cd.id)">
+                <mat-icon>add</mat-icon>
+            </button>
+            <button *ngIf="cartItem.quantity > 1" class="minus-one" (click)="onMinusOne(cartItem.cd.id)">
+                <mat-icon>remove</mat-icon>
+            </button>
+            <button *ngIf="cartItem.quantity == 1" class="minus-one" (click)="onMinusOne(cartItem.cd.id)">
+                <mat-icon>delete</mat-icon>
+            </button>
+
+            <div class="subtotal" *ngIf="cartItem.quantity > 1">Subtotal: {{cartItem.quantity *
+                cartItem.cd.cdInfo.price|currency:'EUR'}}</div>
+            <hr>
+        </li>
+        <li class="grandTotal" *ngIf="grandTotal > 0">Total: {{grandTotal|currency:'EUR'}}</li>
+        
+        <li class="showShippingCosts" *ngIf="showShippingCosts">
+            <div class="shippingCosts">
+                Shipping: {{shippingCosts|currency:"EUR"}}
+            </div>
+            <div class="grandTotalWithShipping">
+                {{grandTotalWithShipping|currency:"EUR"}}
+            </div>
+        </li>
+        
+    </ul>
+    <div class="check-in_sign-up">
+        <div *ngIf="!(customer$|async)" class="new-customer">
+            <button color="primary" mat-raised-button (click)="toSignUp()">sign up</button>
+        </div>
+        <div *ngIf="!(customer$|async)" class="existing-customer">
+            <button color="primary" mat-raised-button (click)="toLogIn()">log in</button>
+        </div>
+    </div>
+
+
+
+    <!-- <button *ngIf="cartItems.length > 0 && customer$|async " mat-raised-button (click)="onContinue()" ><a >Continue</a> </button> -->
+    <div *ngIf="customer$" class="delivery_check_place-order">
+
+        <mat-radio-group class="delivery"
+            
+            (change)="onRadioChange($event)">
+            <mat-radio-button value="pickUp"> 
+                pick up
+            </mat-radio-button>
+            <mat-radio-button value="byMail" [checked]="byMail">
+                by mail
+            </mat-radio-button>
+        </mat-radio-group>
+
+        <div class="example-selected-value">delivery: {{delivery}}</div>
+        <mat-checkbox
+            class="check"
+            [checked]="isChecked"
+            (change)="onCheckboxChange($event)"> this information is correct
+        </mat-checkbox>
+        <button
+            class="place-order"
+            [disabled]="!isChecked"
+            *ngIf="cartItems.length > 0 && customer$|async"
+            mat-raised-button
+            (click)="onPlaceOrder()">
+            Place Order
+        </button>
+    </div>
+</div>

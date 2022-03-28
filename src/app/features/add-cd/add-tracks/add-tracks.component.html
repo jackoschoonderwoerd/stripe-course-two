@@ -1,0 +1,67 @@
+
+<div class="tracks-form-container" fxLayout="column" fxLayoutGap="1rem">
+  <div class="form-header">{{editMode ? 'edit' : 'add'}}</div>
+  <form class="tracks-form" [formGroup]="form" fxLayout="column">
+      <mat-form-field>
+          <input
+              matInput
+              type="number"
+              formControlName="number"
+              placeholder="track number">
+      </mat-form-field>
+      <mat-form-field>
+          <input
+              matInput
+              type="text"
+              formControlName="title"
+              placeholder="title">
+      </mat-form-field>
+      <mat-form-field>
+          <input
+              matInput
+              type="text"
+              formControlName="composer"
+              placeholder="composer">
+      </mat-form-field>
+      <mat-form-field>
+          <input
+              matInput
+              type="text"
+              formControlName="lyricist"
+              placeholder="lyricist">
+      </mat-form-field>
+
+      <div class="duration" fxLayout fxLayoutGap="1rem">
+          <mat-form-field>
+              <input
+                  matInput
+                  type="number"
+                  formControlName="minutes"
+                  placeholder="minutes">
+          </mat-form-field>
+          <mat-form-field>
+              <input
+                  matInput
+                  type="number"
+                  formControlName="seconds"
+                  placeholder="seconds">
+          </mat-form-field>
+      </div>
+      <div class="buttons" fxLayout="column" fxLayoutGap="1rem">
+          <button
+              class="add-track-button"
+              mat-raised-button
+              (click)="onSaveTrack()"
+              [disabled]="form.invalid">
+              {{editMode ? 'Save Edit' : 'Save track'}}
+          </button>
+          <button
+            class="cancel-add-track-button" 
+            mat-raised-button 
+            (click)="onCancelAddTrack()">
+            Cancel {{editMode ? 'edit': 'add'}} Track
+        </button>
+      </div>
+  </form>
+  
+</div>

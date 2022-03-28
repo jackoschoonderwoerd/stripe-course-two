@@ -1,0 +1,94 @@
+<div
+    class="form-container">
+    <div class="header">cd-info</div>
+    <div class="id" *ngIf="cd">Id: {{cd.id}}</div>
+    <div class="image-container">
+        <img class="cd-cover" [src]="imageUrl" alt="">
+    </div>
+    <div class="image-input">
+        <input
+            type="file"
+            (change)="onFileInputChange($event)">
+    </div>
+    <form [formGroup]="form">
+        <mat-form-field>
+            <label for="title">title</label>
+            <input
+                title="title"
+                matInput
+                type="text"
+                formControlName="title">
+        </mat-form-field>
+        <mat-form-field>
+            <label for="bandName">Band</label>
+            <input
+                name="bandName"
+                matInput
+                type="text"
+                formControlName="bandName">
+        </mat-form-field>
+        <mat-form-field>
+            <label for="recording-studio">Recording studio</label>
+            <input
+                name="recording-studio"
+                matInput
+                type="text"
+                formControlName="recordingStudio">
+        </mat-form-field>
+        <mat-form-field>
+            <label for="recording-engineer">Recording enigneer</label>
+            <input
+                name="recording-engineer"
+                matInput
+                type="text"
+                formControlName="recordingEngineer">
+        </mat-form-field>
+        <mat-form-field>
+            <label for="mixer">Mixed by</label>
+            <input
+                name="mixer"
+                matInput
+                type="text"
+                formControlName="mixer">
+        </mat-form-field>
+        <mat-form-field>
+            <label for="producer">Producer</label>
+            <input
+                name="producer"
+                matInput
+                type="text"
+                formControlName="producer">
+        </mat-form-field>
+        <mat-form-field>
+            <label for="publisher">Publisher</label>
+            <input
+                name="publisher"
+                matInput
+                type="text"
+                formControlName="publisher">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input
+                matInput
+                [matDatepicker]="to"
+                formControlName="recordingDate"
+                placeholder="recording date">
+            <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+            <mat-datepicker #to></mat-datepicker>
+        </mat-form-field>
+        
+        <mat-form-field>
+            <label for="price">price</label>
+            <input
+                name="price"
+                matInput
+                type="number"
+                formControlName="price">
+        </mat-form-field>
+        <div class="buttons">
+            <button mat-raised-button (click)="onSubmit()">{{editMode ? 'save edit' : 'add cd info'}}</button>
+            <button mat-raised-button (click)="onCancel()">cancel</button>
+        </div>
+    </form>
+</div>

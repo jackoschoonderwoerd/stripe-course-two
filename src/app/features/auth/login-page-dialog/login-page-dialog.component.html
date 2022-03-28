@@ -1,0 +1,33 @@
+<div class="form-container">
+    <form [formGroup]="loginForm">
+        <mat-form-field>
+            <label for="email">Email</label>
+            <input
+                matInput
+                type="email"
+                formControlName="email">
+        </mat-form-field>
+        <mat-form-field>
+            <label for="password">Password</label>
+            <input
+                matInput
+                type="password"
+                formControlName="password">
+        </mat-form-field>
+        <div class="buttons">
+            <button
+                color="primary"
+                [disabled]="loginForm.invalid"
+                mat-raised-button
+                [mat-dialog-close]="loginForm.value">
+                Submit
+            </button>
+            <button
+                mat-dialog-close
+                mat-raised-button
+                color="warn">
+                cancel
+            </button>
+        </div>
+    </form>
+</div>

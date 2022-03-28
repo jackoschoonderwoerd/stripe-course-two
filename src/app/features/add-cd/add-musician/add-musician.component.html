@@ -1,0 +1,24 @@
+<div class="form-container">
+  <form [formGroup]="form">
+    <mat-form-field>
+      <label for="name"></label>
+      <input
+        type="text"
+        matInput
+        formControlName="name"
+        placeholder="name">
+    </mat-form-field>
+    <div class="" formArrayName="instruments">
+      <div
+        class="form-group"
+        *ngFor="let instrumentControl of getInstrumentControls(); let i = index">
+        <mat-form-field>
+          <input matInput type="text" class="form-control" [formControlName]="i" placeholder="instrument">
+        </mat-form-field>
+      </div>
+      <button class="add-instrument" type="button" (click)="onAddInstrument()">add instrument</button>
+    </div>
+    <button mat-raised-button (click)="onAddMusician()">{{editMode ? 'save edits' : 'add musician'}}</button>
+    <button mat-raised-button (click)="onCancel()">cancel</button>
+  </form>
+</div>

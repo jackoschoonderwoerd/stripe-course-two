@@ -1,0 +1,115 @@
+.main-container {
+    display: flex;
+    .cd {
+        width: 30rem;
+        border: 3px solid red;
+        padding: 1rem;
+        .image-container {
+            width: 100%;
+            .cd-cover {
+                width: 100%;
+            }
+        }
+        .cd-info {
+            padding: 1rem;
+            border: 1px solid black;
+            .header {
+                font-weight: bold;
+            }
+            .add-cd-info-button {
+
+            }
+            .image-container {
+                .cd-cover {
+                    width: 100%;
+                }
+            }
+            .title {
+            }
+            .price {
+            }
+            .edit-cd-info {
+                cursor: pointer;
+            }
+        }
+        .tracks {
+            padding: 1rem;
+            border: 1px solid black;
+            .header {
+                font-weight: bold;
+            }
+            ul {
+                list-style: none;
+                padding: 0;
+                li {
+                    outline: 1px solid #ccc;
+                    padding: 0.3rem;
+                    margin: 0.3rem;
+                    .number_title {
+                        display: flex;
+                        .number {
+                            margin-right: 1rem;
+                        }
+                    }
+                    .composer_lyricist {
+                        display: flex;
+                        .composer {
+                            margin-right: 1rem;
+                        }
+                    }
+                    .duration {
+                        display: flex;
+                        .minutes {
+                        }
+                    }
+                    .edit_delete {
+                        .edit-track {
+                            cursor: pointer;
+                            margin-right: 1rem;
+                        }
+                        .delete-track {
+                            cursor: pointer;
+                            color: red;
+                        }
+                    }
+                }
+            }
+        }
+        .musicians {
+            padding: 1rem;
+            border: 1px solid black;
+            .header {
+                font-weight: bold;
+            }
+            .musicians-list {
+                list-style: none;
+                padding: 0;
+                .musicians-list-item {
+                    .number_title {
+                        display: inline-flex;
+                    }
+                    .musicians-delete {
+                        cursor: pointer;
+                        color: red;
+                    }
+                    .musicians-edit {
+                        cursor: pointer;
+                    }
+                    .instrument-list {
+                        list-style: none;
+                        padding: none;
+                        .instrument-list-item {
+                        }
+                    }
+                }
+            }
+        }
+
+        .add-cd-to-db-button {
+        }
+    }
+
+    .forms {
+        display: inline;
+    }
+}

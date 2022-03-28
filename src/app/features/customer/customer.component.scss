@@ -1,0 +1,93 @@
+.customer-container {
+    padding: 1rem;
+    letter-spacing: 1.5px;
+    .header {
+        font-size: 1.5rem;
+    }
+    .customer-info {
+        background-color: white;
+        padding:1rem;
+        .full-name {
+            display: flex;
+            gap: 0.5rem;
+            .first-name {
+                text-transform: capitalize;
+            }
+            .last-name {
+                text-transform: capitalize;
+            }
+        }
+        .email {
+        }
+        .address {
+            display: flex;
+            gap: 0.5rem;
+            .street {
+            }
+            .house-number {
+            }
+            .addition {
+            }
+        }
+        .zip-code_city {
+            display: flex;
+            gap: 0.5rem;
+            .zip-code {
+            }
+            .city {
+            }
+        }
+        .country {
+        }
+        .update-customer {
+            border: 1px solid black;
+            background-color: #ccc;
+        }
+    }
+    .orders-container {
+        .header {
+        }
+    }
+    .orders {
+        list-style: none;
+        padding: 0;
+        .order {
+            border: 3px solid white;
+            padding: .3rem;
+            margin-bottom: .3rem;
+            .date-ordered {
+                font-weight: bold;
+            }
+            .purchase-session-id {
+            }
+            .cds {
+                list-style: none;
+                padding: 0;
+                .cd {
+                    .band-name_title_info {
+                        display: flex;
+                        align-items: center;
+                        gap: 1rem;
+                        .band-name {
+
+                        }
+                        .title {
+                            font-style: italic;
+                        }
+                        .info {
+                            
+                        }
+
+                    }
+                    .price_quantity_sub-total {
+                        display: flex;
+                        gap: 1rem;
+                    }
+                }
+            }
+            .total {
+                font-weight: bold;
+            }
+        }
+    }
+}

@@ -1,0 +1,51 @@
+repo: https://github.com/angular-university/stripe-course/blob/master/server/server.ts
+
+
+
+03.01 install node & npm & git
+03.02 download code from repo,
+03.03 "git checkout 1-start"
+03.04 "npm install" (frontend)
+03.05 "cd server", "npm install" (backend)
+
+04.01 firebase console
+04.02 add project 'stripe course recording'
+04.03 create instance of firestore db, start in test mode
+04.04 select location
+04.05 project settings => web app
+04.06 register app, setup hosting
+04.07 npm install -g firebase-tools
+04.08 add config to evironments,
+04.09 add db-data.ts & init-db.ts to .gitignore
+04.10 '/stripe-course' "npm run init-db" (populates the db)
+
+05.01 /stripe-course "npm start"
+05.02 localhost:4200
+05.03 firebase console: enable google authentication
+
+13.01 /server> npm run server executes "server" in package.json
+13.02 run-s => run in sequence
+13.03 clean => "clean": "rimraf dist" deletes the current dist-folder
+13.04 copy => "copy": "copyfiles service-accounts/*.json dist" copies the files in the service-accounts folder with the extension json to the dist folder.
+13.05 start:local => "start:local"  etc. check package.json
+
+16.01 chrome => stripe.com => create account
+16.02 stripe => developers => API keys
+
+50.01 install google sdk
+50.02 navigate to /server
+50.03 "gcloud init"
+50.04 "1"
+50.05 "1"
+50.06 select project [13]
+
+51.01 "gcloud app deploy"
+52.02 enable cloud build api
+
+descriptor:                  [C:\Angular\COURSES\UDEMY\STRIPE-IN-PRACTICE\stripe-course-sandbox\server\app.yaml]
+source:                      [C:\Angular\COURSES\UDEMY\STRIPE-IN-PRACTICE\stripe-course-sandbox\server]
+target project:              [stripe-course-sandbox]
+target service:              [default]
+target version:              [20220116t161650]
+target url:                  [https://stripe-course-sandbox.ew.r.appspot.com]
+target service account:      [App Engine default service account]

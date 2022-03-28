@@ -1,0 +1,116 @@
+.cds {
+    padding: 1rem;
+    background-color: white;
+    display: grid;
+    grid-gap: 1rem;
+
+    // width: 100%;
+    // margin: 1rem;
+    .cd {
+        background-color: #ccc;
+        padding: 1rem;
+        // border: 3px solid #4287f5;
+        justify-content: space-between;
+        display: flex;
+        flex-direction: column;
+        .band-name {
+            padding: 0.3rem;
+            font-size: 1.3rem;
+            background-color: white;
+            margin-bottom: 0.3rem;
+            border-radius: 5px;
+        }
+        .image-container {
+            .cd-cover {
+                border: 1px solid black;
+                width: 100%;
+                height: calc(width);
+            }
+        }
+        .title {
+            padding: .3rem;            
+            font-size: 1.3rem;
+            background-color: white;
+            margin-bottom: .5rem;
+            border-radius: 5px;
+        }
+        .title_info_price_basket {
+            .title {
+            }
+            .info_price_basket {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .info {
+                    border: 1px solid black;
+                }
+                .price {
+                    padding: 0.4rem;
+                    border-radius: 5px;
+                    color: white;
+                    background-color: black;
+                    font-size: 1.3rem;
+                }
+                .basket {
+                    border: 1px solid black;
+                }
+            }
+            // border: 1px solid green;
+        }
+    }
+}
+
+@media (min-width: 600px) and (max-width: 949px) {
+    .cds {
+        //    background-color: red;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    /* 
+      Device = Tablets, Ipads (portrait)
+      Screen = 768px to 1024px
+    */
+}
+
+@media (min-width: 950px) and (max-width: 1399px) {
+    .cds {
+        // background-color: yellow;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+/* 
+  Device = Low Resolution Tablets, Mobiles (Landscape)
+  Screen = 481px to 767px
+*/
+@media (min-width: 1400px) and (max-width: 1999px) {
+    .cds {
+        // background-color: green;
+        grid-template-columns: repeat(4, 1fr);
+    }
+    /* 
+      Device = Most of the Smartphones Mobiles (Portrait)
+      Screen = 320px to 479px
+    */
+}
+@media (min-width: 2000px) {
+    .cds {
+        // background-color: orange;
+        grid-template-columns: repeat(5, 1fr);
+    }
+    /* 
+      Device = Most of the Smartphones Mobiles (Portrait)
+      Screen = 320px to 479px
+    */
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    /* 
+    Device = Laptops, Desktops
+    Screen = 1025px to 1280px
+    */
+}
+@media (min-width: 1281px) {
+    /* 
+    Device = Desktops
+    Screen = 1281px to higher resolution desktops
+    */
+}

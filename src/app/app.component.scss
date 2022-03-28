@@ -1,0 +1,28 @@
+mat-sidenav-container {
+    mat-sidenav {
+
+    }
+    mat-sidenav-content {
+        
+        header {
+            position: fixed;
+            width: 100%;
+            z-index:100;
+        }
+        .filler {
+            height: 55px
+        }
+        main {
+            router-outlet {
+
+            }
+        }
+    }
+}
+
+
+
+
+
+
+

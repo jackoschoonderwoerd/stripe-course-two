@@ -1,0 +1,76 @@
+.page-container {
+    padding: 1rem;
+    background-color: #ccc;
+    .header {
+        font-weight: bold;
+        background-color: white;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        
+    }
+    .customer {
+        background-color: white;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        .customer-header {
+            font-weight: bold;
+        }
+    }
+    .empty {
+        background-color: white;
+        padding: 1rem;
+    }
+    .cart-items {
+        list-style: none;
+        
+        background-color: white;
+        padding: 1rem;
+        .order-header {
+            font-weight: bold;
+        }
+        .cart-item {
+            .band-name_title {
+                display: flex;
+                gap: 1rem;
+                .band-name {}
+                .title {
+                    font-style: italic;
+                }
+            }
+            .price_quantity {
+                display: flex;
+                gap: 1rem;
+                .price {}
+                .quantity {}
+            }
+            .subtotal {}
+        }
+        .grandTotal {
+            font-weight: bold;
+        }
+    }
+    .check-in_sign-up {
+        display: flex;
+        justify-content: space-between;
+    }
+    .delivery_check_place-order {
+        background-color: white;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        
+        .delivery {
+            mat-radio-button {
+                display: block;
+            }
+        }
+        .check {
+            display: block;
+        }
+    }
+    .sign-up-form {
+        max-width: 500px;
+        mat-form-field {
+            display: block;
+        }
+    }
+}

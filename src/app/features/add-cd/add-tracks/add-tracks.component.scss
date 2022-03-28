@@ -1,0 +1,57 @@
+.tracks-form-container {
+  max-width: 16rem;
+  padding: 1rem;
+  border: 1px solid black;
+  .form-header {
+      font-weight: bold;
+  }
+  .create-track-button {
+
+  }
+  .tracks-form {
+      mat-form-field {
+          display: block;
+      }
+      .buttons {
+          .add-track-button {
+          }
+          .cancel-add-track-button {
+              
+          }
+      }
+  }
+  .tracks-list {
+      border: 2px solid red;
+      list-style: none;
+      padding:0;
+      li {
+          .track {
+              .trash-number-title {
+                  display: flex;
+                  .trash {
+                      cursor: pointer;
+                      color: red;
+                  }
+                  .number {
+                      
+                  }
+                  .title {
+                      
+                  }
+              }
+              .minutes-seconds-edit {
+                  display: flex;
+                  .minutes {
+
+                  }
+                  .seconds {
+
+                  }
+                  .edit {
+                      cursor: pointer;
+                  }
+              }
+          }
+      }
+  }
+}

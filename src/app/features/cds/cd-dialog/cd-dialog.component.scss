@@ -1,0 +1,100 @@
+.info-container {
+    .band-name_image-container_title {
+        padding: 0.5rem;
+        background-color: #ccc;
+        margin-bottom: .3rem;
+        .band-name {
+            padding: 0.3rem;
+            font-size: 1.3rem;
+            background-color: white;
+            margin-bottom: 0.5rem;
+            border-radius: 5px;
+        }
+        .image-container {
+            .cd-cover {
+            }
+        }
+        .title {
+            padding: 0.3rem;
+            font-size: 1.3rem;
+            background-color: white;
+            margin-bottom: 0.5rem;
+            border-radius: 5px;
+        }
+    }
+
+    .tracks {
+        background: #ccc;
+        margin-bottom: 0.3rem;
+        padding: 0.5rem;
+        .track {
+            .number_title_duration {
+                display: flex;
+                justify-content: space-between;;
+                .number_title {
+                    display: flex;
+                    .track-number{
+                        margin-right: .5rem;
+                    }
+                    .track-title{}
+                }
+                .duration {
+                    display: flex;
+                }
+            }
+            .composer_lyricist {
+                font-style: italic;
+                text-indent: 2rem;;
+                display: flex;
+                justify-content: space-between;
+            }
+           
+        }
+    }
+    .musicians {
+        background: #ccc;
+        padding: 0.5rem;
+        margin-bottom: 0.3rem;
+        
+        .musician {
+            // border: 1px solid red;
+            display: flex;
+            justify-content: space-between;
+            .musician-name {
+                // border: 1px solid green;
+                display: flex;
+            }
+            .instruments {
+                // border: 1px solid black;
+                display: flex;
+                list-style: none;
+                font-style: italic;
+                padding: 0;
+                margin:0;
+                gap: 0.5rem;
+                .instrument {
+                }
+            }
+        }
+    }
+    .cd-info {
+        background: #ccc;
+        padding: 0.5rem;
+        .recording-studio,
+        .recording-engineer,
+        .mixer,
+        .producer,
+        .publisher,
+        .recording-date {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+        
+
+}
+.dialog-close-button-container {
+    // border: 1px solid red;
+    display: flex;
+    justify-content: space-between;
+}

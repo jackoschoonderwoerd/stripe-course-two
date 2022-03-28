@@ -1,0 +1,47 @@
+// .musicians-form-container {
+//   max-width: 400px;
+//   margin: auto;
+//   margin-top: 2rem;
+//   padding: 2rem;
+//   border: 3px solid #4287f5;
+//   form {
+//       border: 3px solid red;
+//       width: 100%;
+
+//       mat-form-field {
+//           width: 100%;
+//       }
+//       button {
+//           margin-bottom: 1rem;
+//           width: 100%;
+//       }
+//   }
+// }
+
+.form-container {
+  border: 1px solid black;
+  padding: 1rem;
+  max-width: 16rem;
+  .header {
+      font-weight: bold;
+  }
+  .image-container {
+      .cd-cover {
+          width: 100%
+      }
+  }
+  form {
+      mat-form-field{
+          display: block;
+      }
+      .image-input {
+
+      }
+      .buttons {
+          display: flex;
+          
+          justify-content: space-between;
+          padding: 1rem;
+      }
+  }
+}

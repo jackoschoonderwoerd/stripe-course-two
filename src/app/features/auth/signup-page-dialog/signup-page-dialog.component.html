@@ -1,0 +1,93 @@
+<form class="sign-up-form" [formGroup]="signUpForm">
+    <mat-form-field>
+        <label for="firstName">First Name</label>
+        <input
+            [readonly]="customer"
+            formControlName="firstName"
+            name="firstName"
+            type="text"
+            matInput>
+    </mat-form-field>
+    <mat-form-field>
+        <label for="lastName">Last Name</label>
+        <input
+            [readonly]="customer"
+            formControlName="lastName"
+            name="lastName"
+            type="text"
+            matInput>
+    </mat-form-field>
+    <mat-form-field>
+        <label for="email">Email Address</label>
+        <input
+            formControlName="email"
+            name="email"
+            type="text"
+            matInput>
+    </mat-form-field>
+    <mat-form-field>
+        <label for="street">Street</label>
+        <input
+            formControlName="street"
+            name="street"
+            type="text"
+            matInput>
+    </mat-form-field>
+    <mat-form-field>
+        <label for="houseNumber">House Number</label>
+        <input
+            formControlName="houseNumber"
+            name="houseNumber"
+            type="number"
+            matInput>
+    </mat-form-field>
+    <mat-form-field>
+        <label for="addition">Addition</label>
+        <input
+            formControlName="addition"
+            name="addition"
+            type="text"
+            matInput>
+    </mat-form-field>
+    <mat-form-field>
+        <label for="zipCode">Zip Code</label>
+        <input
+            formControlName="zipCode"
+            name="zipCode"
+            type="text"
+            matInput>
+    </mat-form-field>
+    <mat-form-field>
+        <label for="city">City</label>
+        <input
+            formControlName="city"
+            name="city"
+            type="text"
+            matInput>
+    </mat-form-field>
+    <mat-form-field>
+        <label for="country">Country</label>
+        <input
+            formControlName="country"
+            name="country"
+            type="text"
+            matInput>
+    </mat-form-field>
+    <mat-form-field *ngIf="!customer">
+        <label for="password">Password</label>
+        <input
+            formControlName="password"
+            name="password"
+            type="text"
+            matInput>
+    </mat-form-field>
+    <div class="buttons">
+        <button
+            color="primary"
+            [disabled]="signUpForm.invalid"
+            mat-raised-button
+            [mat-dialog-close]="signUpForm.value">{{customer ? 'Update' : 'Sign up'}}
+        </button>
+        <button color="warn" mat-raised-button mat-dialog-close>cancel</button>
+    </div>
+</form>

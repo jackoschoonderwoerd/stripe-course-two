@@ -1,0 +1,74 @@
+<!-- <div class="id">
+    <span>Id: </span>{{cd.id}}
+</div> -->
+<div class="info-container">
+    <div class="band-name_image-container_title">
+        <div class="band-name">
+            <span *ngIf="cd">{{cd.cdInfo.bandName}}</span>
+        </div>
+        <div class="image-container">
+            <img style="width:100%" [src]="cd.cdInfo.imageUrl" alt="" class="cd-cover">
+        </div>
+        <div class="title">
+            <span *ngIf="cd">{{cd.cdInfo.title}}</span>
+        </div>
+    </div>
+
+    <div class="tracks">
+        <div class="track" *ngFor="let track of cd.tracks">
+            <div class="number_title_duration">
+                <div class="number_title">
+                    <div class="track-number">{{track.number}}</div>
+                    <div class="track-title">{{track.title}}</div>
+                </div>
+                <div class="duration">
+                    <div class="minutes">{{track.minutes}}</div>:
+                    <div class="seconds">{{track.seconds|twodecimalpipe}}</div>
+                </div>
+            </div>
+            <div class="composer_lyricist">
+                <div class="composer">{{track.composer}}</div>
+                <div class="lyricist">{{track.lyricist}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="musicians">
+        <div class="musician" *ngFor="let musician of cd.musicians">
+            <div class="musician-name">{{musician.name}}
+            </div>
+            <ul class="instruments">
+                <li *ngFor="let instrument of musician.instruments" class="instrument">
+                    {{instrument}}
+                </li>
+            </ul>
+
+        </div>
+    </div>
+    <div class="cd-info">
+        <div class="recording-studio">
+            <span>Recording studio: </span><span *ngIf="cd">{{cd.cdInfo.recordingStudio}}</span>
+        </div>
+        <div class="recording-engineer">
+            <span>Recording engineer: </span><span *ngIf="cd">{{cd.cdInfo.recordingEngineer}}</span>
+        </div>
+        <div class="mixer">
+            <span>Mixed by: </span><span *ngIf="cd">{{cd.cdInfo.mixer}}</span>
+        </div>
+        <div class="producer">
+            <span>Producer: </span><span *ngIf="cd">{{cd.cdInfo.producer}}</span>
+        </div>
+        <div class="publisher">
+            <span>Publisher: </span><span *ngIf="cd">{{cd.cdInfo.publisher}}</span>
+        </div>
+        <div class="recording-date">
+            <span>Recording date: </span><span *ngIf="cd">{{cd.cdInfo.recordingDate | date}}</span>
+        </div>
+    </div>
+</div>
+
+<div class="dialog-close-button-container">
+    <div class="filler"></div>
+    <button class="dialog-close-button" mat-button (click)="onNoClick()">
+        <mat-icon mat-dialog-close>close</mat-icon>
+    </button>
+</div>
