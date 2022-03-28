@@ -58,10 +58,13 @@
         padding: 1rem;
         margin-bottom: 1rem;
         
-        .delivery {
-            mat-radio-button {
-                display: block;
+        .delivery-container {
+            .delivery-radio-group {
+                mat-radio-button {
+                    display: block;
+                }
             }
+            .delivery {}
         }
         .check {
             display: block;

@@ -59,9 +59,9 @@
         <li class="grandTotal" *ngIf="grandTotal > 0">Total: {{grandTotal|currency:'EUR'}}</li>
         
         <li class="showShippingCosts" *ngIf="showShippingCosts">
-            <div class="shippingCosts">
+            <!-- <div class="shippingCosts">
                 Shipping: {{shippingCosts|currency:"EUR"}}
-            </div>
+            </div> -->
             <div class="grandTotalWithShipping">
                 {{grandTotalWithShipping|currency:"EUR"}}
             </div>
@@ -82,18 +82,20 @@
     <!-- <button *ngIf="cartItems.length > 0 && customer$|async " mat-raised-button (click)="onContinue()" ><a >Continue</a> </button> -->
     <div *ngIf="customer$" class="delivery_check_place-order">
 
-        <mat-radio-group class="delivery"
-            
-            (change)="onRadioChange($event)">
-            <mat-radio-button value="pickUp"> 
-                pick up
-            </mat-radio-button>
-            <mat-radio-button value="byMail" [checked]="byMail">
-                by mail
-            </mat-radio-button>
-        </mat-radio-group>
+        <div class="delivery-container" *ngIf="delivery">
+            <mat-radio-group class="delivery-radio-group"
+                
+                (change)="onRadioChange($event)">
+                <mat-radio-button value="pickUp"> 
+                    pick up
+                </mat-radio-button>
+                <mat-radio-button value="byMail" [checked]="byMail">
+                    by mail
+                </mat-radio-button>
+            </mat-radio-group>
+            <div class="delivery">delivery: {{delivery}}</div>
+        </div>
 
-        <div class="example-selected-value">delivery: {{delivery}}</div>
         <mat-checkbox
             class="check"
             [checked]="isChecked"

@@ -33,7 +33,7 @@ export class CheckoutComponent implements OnInit {
     customer$: Observable<Customer>
     purchaseStarted: boolean = false;
     isChecked: boolean = false
-    delivery: string = 'by mail';
+    delivery: boolean = false;
     byMail: boolean = true;
     showShippingCosts: boolean = true;
     shippingCosts: number = 4.5;
@@ -83,15 +83,15 @@ export class CheckoutComponent implements OnInit {
     }
 
     onRadioChange(e) {
-        this.delivery = e.value;
-        if(e.value === 'byMail') {
-            this.showShippingCosts = true;
-            this.grandTotalWithShipping = this.grandTotal + this.shippingCosts
-        } else  {
-            this.showShippingCosts = false;
+        // this.delivery = e.value;
+        // if(e.value === 'byMail') {
+        //     this.showShippingCosts = true;
+        //     this.grandTotalWithShipping = this.grandTotal + this.shippingCosts
+        // } else  {
+        //     this.showShippingCosts = false;
             
-        }
-        console.log(this.showShippingCosts)
+        // }
+        // console.log(this.showShippingCosts)
     }
 
     onPlaceOrder() {

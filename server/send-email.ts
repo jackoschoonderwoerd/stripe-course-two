@@ -24,7 +24,7 @@ export async function sendEmail(userId: string, cds) {
             console.log('[SE 11] USER.EMAIL: ', user.email);
             // sgMail.setApiKey(process.env.SENDGRID_API)
             const numbers = [1,2,3]
-            sgMail.setApiKey('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')
+            sgMail.setApiKey(process.env.SENDGRID_API)
             const msg = {
                 to: user.email,
                 from: 'jackoboes@gmail.com', // this has to be the 'single sender verification' (sendgrid => settings => sender authentication)

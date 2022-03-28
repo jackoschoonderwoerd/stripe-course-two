@@ -1,43 +1,15 @@
-<!-- <mat-toolbar>
-    <ul>
-        <li>
-            <button
-                mat-icon-button
-                (click)="onMenu()">
-                <mat-icon>menu</mat-icon>
-            </button>
-        </li>
-        <li>
-            <a routerLink="/cds">cds</a>
-        </li>
-        <li *ngIf="customer">
-            <a routerLink="/customer"><mat-icon>account_circle</mat-icon>{{customer.firstName}}</a>
-        </li>
-        <li *ngIf="cartItemsLength != 0">
-            <a routerLink="/checkout"><mat-icon>shopping_basket</mat-icon>{{cartItemsLength}}</a>
-        </li>
-        <li *ngIf="customer">
-            <button
-                mat-icon-button
-                (click)="onLogOut()">
-                <mat-icon>exit_to_app</mat-icon>
-            </button>
-        </li>
-    </ul>
-</mat-toolbar> -->
 <mat-toolbar>
     <div class="menu" (click)="onMenu()">
-        <button>
-            <mat-icon>menu</mat-icon>
-        </button>
+        <mat-icon>menu</mat-icon>
+
     </div>
     <div class="cds" routerLink="/cds">cds</div>
     <div
         *ngIf="customer"
-        class="account-circle_first-name" 
+        class="account-circle_first-name"
         routerLink="/customer">
         <div class="account-circle">
-            <mat-icon>account_circle</mat-icon>
+            <!-- <mat-icon>account_circle</mat-icon> -->
         </div>
         <div class="first-name">{{customer.firstName}}</div>
     </div>
@@ -50,6 +22,8 @@
         </div>
     </div>
     <div *ngIf="customer" class="logout" (click)="onLogOut()">
-        <button mat-icon-button><mat-icon>exit_to_app</mat-icon></button>
+        <button mat-icon-button>
+            <mat-icon>exit_to_app</mat-icon>
+        </button>
     </div>
 </mat-toolbar>

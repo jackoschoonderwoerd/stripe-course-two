@@ -18,13 +18,17 @@ mat-toolbar {
     //         }
     //     }
     // }
-    gap: 1rem;
+    gap: 1.5rem;
 
     .menu {
-        
+        cursor: pointer;
+    }
+    .cds {
+        cursor: pointer;
     }
     .account-circle_first-name {
         // border: 1px solid brown;
+        cursor: pointer;
         display: flex;
         .account-circle {
             mat-icon {
@@ -39,6 +43,7 @@ mat-toolbar {
     }
     .cart {
         // border: 1px solid brown;
+        cursor: pointer;
         display: flex;
         .cart-icon {
             bottom: 20px;
