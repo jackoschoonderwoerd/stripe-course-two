@@ -24,7 +24,7 @@ export class SidenavComponent implements OnInit {
             if(user) {
                 this.authService.getCustomer(user.uid).subscribe((customer: Customer) => {
                     this.customer = customer;
-                    console.log(this.customer)
+                    // console.log(this.customer)
                 })
             } else {
                 console.log('no user');

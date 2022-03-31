@@ -39,7 +39,7 @@ interface RequestInfo {
 
 export async function createCheckoutCdSession(req: Request, res: Response) {
 
-    console.log('[COCdR 26]: createCheckoutCdSession invoked', req.body.shippingCosts);
+    // console.log('[COCdR 26]: createCheckoutCdSession invoked', req.body.shippingCosts);
 
     try {
 
@@ -89,7 +89,7 @@ export async function createCheckoutCdSession(req: Request, res: Response) {
 
             const lineItems = await addDataToIdAndQuantity(req.body.cdIdsAndQuantities)
                 .then((cdsWithQuantity: any) => {
-                    console.log('cd: 57 cdsWithQuantity ', cdsWithQuantity)
+                    // console.log('cd: 57 cdsWithQuantity ', cdsWithQuantity)
                     return createLineItems(cdsWithQuantity.cds, req.body.shippingCosts)
                 })
                 .catch(err => console.log('[COR 94]', err));
@@ -133,7 +133,7 @@ function setupPurchaseCdSession(info: RequestInfo, lineItems, sessionId: string,
             grandTotal: 45
         }
     }
-    console.log('[COR 143]', config.success_url);
+    // console.log('[COR 143]', config.success_url);
 
     if (stripeCustomerId) {
         config.customer = stripeCustomerId
@@ -143,7 +143,7 @@ function setupPurchaseCdSession(info: RequestInfo, lineItems, sessionId: string,
 
 function createLineItems(cdsWithQuantity, shippingCosts) {
 
-    console.log('[CO 146]shippingCosts', shippingCosts);
+    // console.log('[CO 146]shippingCosts', shippingCosts);
 
     let lineItems = []
     cdsWithQuantity.forEach((cdWithQuantity: any) => {
@@ -163,7 +163,7 @@ function createLineItems(cdsWithQuantity, shippingCosts) {
         currency: "eur",
         quantity: 1
     })
-    console.log('[165]: ', lineItems);
+    // console.log('[165]: ', lineItems);
     return lineItems;
 }
 

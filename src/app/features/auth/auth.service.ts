@@ -20,7 +20,7 @@ export class AuthService {
     isAdmin = new EventEmitter<boolean>();
     customer: Customer;
     customerChanged = new EventEmitter<Customer>();
-    
+
     uid: string
     cartItemsLength: number;
 
@@ -61,19 +61,20 @@ export class AuthService {
     }
 
     logout() {
-        if(this.checkoutService.getCartItems().length != 0) {
+        if (this.checkoutService.getCartItems().length != 0) {
             console.log(this.checkoutService.getCartItems().length)
-            if(!confirm('Are you sure, there are still items in you cart')) {
+            if (!confirm('Are you sure, there are still items in you cart')) {
                 return
-            } 
-        this.checkoutService.emptyCart()
-        this.afAuth.auth.signOut();
+            }
+            // this.checkoutService.emptyCart()
+        }
         this.customerService.getCustomerByUid(null)
+        this.checkoutService.emptyCart();
         localStorage.removeItem('customer');
         localStorage.removeItem('cartItems');
         this.router.navigate(['cds'])
         this.customerChanged.emit(null);
-        }
+        this.afAuth.auth.signOut();
     }
 
 
@@ -91,7 +92,7 @@ export class AuthService {
             })
     }
     getCustomer(uid) {
-        console.log(uid);
+        // console.log(uid);
         return this.db.collection('customers')
             .doc(uid)
             .snapshotChanges()

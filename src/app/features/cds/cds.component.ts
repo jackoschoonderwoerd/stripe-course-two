@@ -43,7 +43,7 @@ export class CdsComponent implements OnInit {
 
         this.afAuth.user.subscribe(user => {
             if(user) {
-                console.log(user.uid);
+                // console.log(user.uid);
                 if (user.uid === 'OsZTBYWyXnQQ7rzN0TIoAByDSCI3') {
                     this.isAdmin = true
                     console.log(user.uid, this.isAdmin);

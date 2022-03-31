@@ -58,7 +58,7 @@ export class CheckoutComponent implements OnInit {
         })
         this.acualizeCustomer()
         this.cartItems = this.checkoutService.getCartItems();
-        console.log(this.cartItems);
+        // console.log(this.cartItems);
 
         this.totalCds = this.checkoutService.calculateGrandTotal();
     }
@@ -67,7 +67,7 @@ export class CheckoutComponent implements OnInit {
     acualizeCustomer() {
         this.afAuth.user.subscribe(user => {
             if (user) {
-                console.log(user.uid);
+                // console.log(user.uid);
                 this.customer$ = this.customerService.getCustomerByUid(user.uid)
             } else {
                 console.log('no user')
@@ -77,7 +77,7 @@ export class CheckoutComponent implements OnInit {
     }
 
     onCheckboxChange(event) {
-        console.log(event)
+        // console.log(event)
         this.isChecked = event.checked;
     }
 
@@ -95,7 +95,7 @@ export class CheckoutComponent implements OnInit {
 
     onPlaceOrder() {
 
-        console.log('THIS.CARTITEMS', this.cartItems);
+        // console.log('THIS.CARTITEMS', this.cartItems);
         const orderedCds = []
         this.cartItems.forEach((cartItem: any) => {
             orderedCds.push({ cdId: cartItem.cd.id, quantity: cartItem.quantity })
@@ -107,7 +107,7 @@ export class CheckoutComponent implements OnInit {
             this.shippingCosts)
             .subscribe(
                 (session: CheckoutSession) => {
-                    console.log(session)
+                    // console.log(session)
                     this.checkoutSessionService.redirectToCheckout(session)
                 },
                 err => {

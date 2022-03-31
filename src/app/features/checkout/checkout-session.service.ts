@@ -35,17 +35,17 @@ export class CheckoutSessionService {
 
         const cdIdsAndQuantities: CdIdQuantity[] = [];
         cartItems.forEach((cartItem: CartItem) => {
-            console.log(cartItem)
-            console.log(cartItem.cd.id);
+            // console.log(cartItem)
+            // console.log(cartItem.cd.id);
             cdIdsAndQuantities.push({ id: cartItem.cd.id, quantity: cartItem.quantity })
         })
-        console.log('JWTAUTH: ', this.jwtAuth);
+        // console.log('JWTAUTH: ', this.jwtAuth);
         const headers = new HttpHeaders().set("Authorization", this.jwtAuth);
 
-        console.log(cdId)
-        console.log(cartItems.length)
-        console.log(this.buildCallbackUrl())
-        console.log(environment.api.baseUrl);
+        // console.log(cdId)
+        // console.log(cartItems.length)
+        // console.log(this.buildCallbackUrl())
+        // console.log(environment.api.baseUrl);
 
 
 
@@ -74,7 +74,7 @@ export class CheckoutSessionService {
     }
 
     redirectToCheckout(session: CheckoutSession) {
-        console.log('Cds SESSION: ', session);
+        // console.log('Cds SESSION: ', session);
         const stripe = Stripe(session.stripePublicKey);
         stripe.redirectToCheckout({
             sessionId: session.stripeCheckoutSessionId

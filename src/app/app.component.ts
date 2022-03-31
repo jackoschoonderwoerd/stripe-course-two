@@ -60,7 +60,7 @@ export class AppComponent implements OnInit {
         
         this.afAuth.authState.subscribe(state => {
             if(state) {
-                console.log(state.uid);
+                // console.log(state.uid);
 
                 this.customerService.getCustomerByUid(state.uid);
             } else {

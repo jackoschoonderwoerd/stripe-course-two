@@ -10,7 +10,8 @@ mat-sidenav-container {
             z-index:100;
         }
         .filler {
-            height: 55px
+            height: 56px;
+            background-color: red;
         }
         main {
             router-outlet {
@@ -22,7 +23,20 @@ mat-sidenav-container {
 
 
 
-
+@media (min-width: 600px) {
+    mat-sidenav-container {
+        mat-sidenav {
+    
+        }
+        mat-sidenav-content {
+            .filler {
+                height: 64px;
+                background-color: red;
+            }
+            
+        }
+    }
+}
 
 
 

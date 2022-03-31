@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CheckoutComponent } from './features/checkout/checkout.component';
 import { CustomerComponent } from './features/customer/customer.component';
 import { CheckUserDataComponent } from './features/check-user-data/check-user-data.component'
+import { StripeCheckoutComponent } from './stripe-checkout/stripe-checkout.component';
 
 const routes: Routes = [
     {
@@ -30,6 +31,10 @@ const routes: Routes = [
         path: 'checkout',
         component: CheckoutComponent
     },
+    {
+        path:"stripe-checkout",
+        component: StripeCheckoutComponent
+      },
     {
         path: "**",
         redirectTo: '/'

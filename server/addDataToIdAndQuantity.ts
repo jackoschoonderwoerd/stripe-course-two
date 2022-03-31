@@ -28,7 +28,7 @@ export function addDataToIdAndQuantity(cdIdsQuantities: CdIdQuantity[]) {
             getDocData(`cds/${cdIdQuantity.id}`)
             .then(cd => {
                 grandTotal = grandTotal + cd.cdInfo.price * cdIdQuantity.quantity;
-                console.log('[AD 33]GRANDTOTAL: ', grandTotal);
+                // console.log('[AD 33]GRANDTOTAL: ', grandTotal);
                 cdsIdDataQuantity.push(
                     {
                         id: cdIdQuantity.id,

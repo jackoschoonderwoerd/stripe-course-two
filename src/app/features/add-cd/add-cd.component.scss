@@ -111,5 +111,16 @@
 
     .forms {
         display: inline;
+        add-cd-info {
+
+        }
+        add-tracks {
+            border: 3px solid blue;
+            position:fixed;
+        }
+        add-musician {
+            border: 3px solid blue;
+            position:fixed;
+        }
     }
 }

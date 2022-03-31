@@ -18,7 +18,7 @@ export async function stripeCdWebhooks(req: Request, res: Response) {
         );
         if (event.type == "checkout.session.completed") {
             const session = event.data.object;
-            console.log('[SWR 19]: ', session)
+            // console.log('[SWR 19]: ', session)
             await onCheckoutSessionCompleted(session)
         } 
         res.json({ received: true });
@@ -46,7 +46,7 @@ async function onCheckoutSessionCompleted(session) {
 
 async function fulfillCoursePurchase(userId: string, cdIdsAndQuantities, purchaseSessionId: string, stripeCustomerId: string) {
 
-    console.log('[WR 40]: ', cdIdsAndQuantities);
+    // console.log('[WR 40]: ', cdIdsAndQuantities);
 
     const completeCds: any = await addDataToIdAndQuantity(cdIdsAndQuantities);
 
@@ -61,7 +61,7 @@ async function fulfillCoursePurchase(userId: string, cdIdsAndQuantities, purchas
 
     const dateOrdered = Date.now().toString();
 
-    console.log('[WH]68: ', completeCds);
+    // console.log('[WH]68: ', completeCds);
    
 
     customer.orders.push(

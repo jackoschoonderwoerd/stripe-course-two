@@ -10,7 +10,7 @@ const admin = require('firebase-admin');
 
 export async function sendEmail(userId: string, cds) {
 
-    console.log('[SE 13]CDS: ', cds)
+    // console.log('[SE 13]CDS: ', cds)
 
     const cdsWithQuantity = await addDataToIdAndQuantity(cds)
 

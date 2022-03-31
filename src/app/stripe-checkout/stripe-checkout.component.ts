@@ -36,6 +36,7 @@ export class StripeCheckoutComponent implements OnInit {
                 .subscribe(
                     (res) => {
                         console.log(res);
+                        this.checkoutService.emptyCart();
                         this.waiting = false;
                         this.message = "Purchase SUCCESSFUL, redirecting...";
                         

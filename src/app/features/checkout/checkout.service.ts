@@ -37,7 +37,7 @@ export class CheckoutService {
 
 
     getCartItems() {
-        console.log(this.cartItems)
+        // console.log(this.cartItems)
         return this.cartItems;
     }
 
@@ -74,7 +74,7 @@ export class CheckoutService {
     calculateGrandTotal() {
         let grandTotal = 0;
         this.cartItems.forEach((cartItem: CartItem) => {
-            console.log(cartItem);
+            // console.log(cartItem);
             grandTotal += cartItem.cd.cdInfo.price * cartItem.quantity
         })
         return grandTotal;
@@ -95,9 +95,9 @@ export class CheckoutService {
         }
     }
     emptyCart() {
-        console.log('emptying cart');
         this.cartItems = [];
         this.cartItemsChanged.emit(this.cartItems);
+        localStorage.removeItem('cartItems');
         console.log('emptied cart', this.cartItems);
     }
 }

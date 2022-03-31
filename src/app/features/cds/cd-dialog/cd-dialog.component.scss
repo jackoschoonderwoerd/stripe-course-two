@@ -1,4 +1,19 @@
+.header-container {
+    position: sticky;
+    background-color: white;
+    // height: 50px;
+    width: 100%;
+    top: 0px;
+    .header {
+        // text-align: center;
+        // border: 1px solid red;
+        padding: .3rem;
+        font-size: 1.3rem;
+        margin: .5rem;
+    }
+}
 .info-container {
+    
     .band-name_image-container_title {
         padding: 0.5rem;
         background-color: #ccc;
@@ -67,6 +82,7 @@
                 display: flex;
             }
             .instruments {
+                text-align: right;
                 // border: 1px solid black;
                 text-transform: capitalize;
                 display: flex;

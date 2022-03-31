@@ -8,7 +8,7 @@ const row = html => `<tr>\n${html}</tr>\n`,
     datarow = object => row(Object.values(object).reduce((html, value) => (html + `<td class="alignRight">${value}</td>`), ''));
 
 export function createEmail(cdsWithQuantity: any, customerData) {
-    console.log('[CH 11]: ', cdsWithQuantity, customerData)
+    // console.log('[CH 11]: ', cdsWithQuantity, customerData)
     return `
             <p>Thank you for your order</p>
             ${createTable(cdsWithQuantity.cds)}
