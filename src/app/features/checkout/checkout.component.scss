@@ -45,7 +45,29 @@
             }
             .subtotal {}
         }
-        .grandTotal {
+        .shipping-options {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: .3rem;
+            .shipping-option {
+                font-weight: bold;
+            }
+        }
+        .pick-up-info {
+            padding: .3rem;
+            background-color: #ccc;
+            display: inline-block;
+            font-weight: bold;
+            }
+        .totalCds {
+            font-weight: bold;
+        }
+        .shipping-costs {
+            display: flex;
+            gap: .3rem;
+            font-weight: bold;
+        }
+        .total {
             font-weight: bold;
         }
     }

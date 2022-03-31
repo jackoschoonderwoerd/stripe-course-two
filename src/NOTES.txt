@@ -1,1 +1,11 @@
 ./stripe listen --forward-to localhost:9000/stripe-webhooks
+
+from live to local:
+
+stripe: disable hosted endpoint webhooks
+
+env:
+
+enable LOCAL: STRIPE_WEBHOOK_KEY
+
+disable: LIVE: STRIPE_WEBHOOK_KEY

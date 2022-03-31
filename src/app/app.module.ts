@@ -31,6 +31,8 @@ import { NgModule } from '@angular/core';
 import { SidenavComponent } from './features/navigation/sidenav/sidenav.component';
 import { SignupPageDialogComponent } from './features/auth/signup-page-dialog/signup-page-dialog.component';
 import { StripeCheckoutComponent } from './stripe-checkout/stripe-checkout.component';
+import { PickUpInfoDialogComponent } from './features/checkout/pick-up-info-dialog/pick-up-info-dialog.component';
+import { FilterComponent } from './features/filter/filter.component';
 
 
 
@@ -50,6 +52,8 @@ import { StripeCheckoutComponent } from './stripe-checkout/stripe-checkout.compo
     SidenavComponent,
     SignupPageDialogComponent,
     StripeCheckoutComponent,
+    PickUpInfoDialogComponent,
+    FilterComponent,
 
 
   ],

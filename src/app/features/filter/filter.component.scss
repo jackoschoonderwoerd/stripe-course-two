@@ -1,0 +1,23 @@
+.main-container {
+    background-color: #ccc;
+    padding: 1rem;
+    form {
+        // border: 1px solid red;
+        width: 100%;
+        .form-field_button {
+            display: flex;
+            justify-content: space-between;
+            // border: 1px solid blue;
+            mat-form-field {
+                width: 100%;
+            }
+            button {
+                margin-left: 1rem;
+            }
+        }
+    }
+    // .icon-container {
+    //     display: flex;
+    //     justify-content: space-between;
+    // }
+}

@@ -16,6 +16,7 @@ import { CustomerService } from './../../core/services/customer.service'
 import { CheckoutSessionService } from './checkout-session.service'
 import { CheckoutSession } from 'app/core/interfaces/checkout-session.model';
 import { Router } from '@angular/router';
+import { PickUpInfoDialogComponent } from './pick-up-info-dialog/pick-up-info-dialog.component';
 
 @Component({
     selector: 'checkout',
@@ -28,18 +29,16 @@ export class CheckoutComponent implements OnInit {
     cartItems: CartItem[]
     cds: Cd[] = []
     cds$: Observable<Cd[]>
-    grandTotal: number = 0;
-    grandTotalWithShipping: number; 
+    totalCds: number = 0;
+    totalWithShipping: number;
     customer$: Observable<Customer>
     purchaseStarted: boolean = false;
     isChecked: boolean = false
-    delivery: boolean = false;
-    byMail: boolean = true;
-    showShippingCosts: boolean = true;
+    // delivery: boolean = false;
+    // byMail: boolean = true;
+    // shippingCosts: boolean = true;
+    // shipping: boolean = true;
     shippingCosts: number = 4.5;
-   
-    
-
 
     constructor(
         private checkoutService: CheckoutService,
@@ -60,14 +59,14 @@ export class CheckoutComponent implements OnInit {
         this.acualizeCustomer()
         this.cartItems = this.checkoutService.getCartItems();
         console.log(this.cartItems);
-        
-        this.grandTotal = this.checkoutService.calculateGrandTotal();
+
+        this.totalCds = this.checkoutService.calculateGrandTotal();
     }
 
 
     acualizeCustomer() {
         this.afAuth.user.subscribe(user => {
-            if(user) {
+            if (user) {
                 console.log(user.uid);
                 this.customer$ = this.customerService.getCustomerByUid(user.uid)
             } else {
@@ -82,29 +81,30 @@ export class CheckoutComponent implements OnInit {
         this.isChecked = event.checked;
     }
 
-    onRadioChange(e) {
-        // this.delivery = e.value;
-        // if(e.value === 'byMail') {
-        //     this.showShippingCosts = true;
-        //     this.grandTotalWithShipping = this.grandTotal + this.shippingCosts
-        // } else  {
-        //     this.showShippingCosts = false;
-            
-        // }
-        // console.log(this.showShippingCosts)
+    onShippingOptionChange(e) {
+        console.log(e.value);
+        if (e.value == 'shipping') {
+            this.shippingCosts = 4.5;
+        } else {
+            this.shippingCosts = 0;
+        }
+    }
+    onPickUp() {
+        this.dialog.open(PickUpInfoDialogComponent)
     }
 
     onPlaceOrder() {
-        
+
         console.log('THIS.CARTITEMS', this.cartItems);
         const orderedCds = []
         this.cartItems.forEach((cartItem: any) => {
-            orderedCds.push({cdId: cartItem.cd.id, quantity: cartItem.quantity})
+            orderedCds.push({ cdId: cartItem.cd.id, quantity: cartItem.quantity })
         })
         // console.log(orderedCds);
         this.checkoutSessionService.startCdsCheckoutSession(
-            '7bt0FfOSgnUMEKToerD9', 
-            this.cartItems)
+            '7bt0FfOSgnUMEKToerD9',
+            this.cartItems, 
+            this.shippingCosts)
             .subscribe(
                 (session: CheckoutSession) => {
                     console.log(session)
@@ -124,26 +124,26 @@ export class CheckoutComponent implements OnInit {
 
     onPlusOne(cdId) {
         this.checkoutService.plusOne(cdId);
-        this.grandTotal = this.checkoutService.calculateGrandTotal()
+        this.totalCds = this.checkoutService.calculateGrandTotal()
     }
     onMinusOne(cdId) {
         this.checkoutService.minusOne(cdId);
-        this.grandTotal = this.checkoutService.calculateGrandTotal()
+        this.totalCds = this.checkoutService.calculateGrandTotal()
     }
 
-  
+
     toSignUp() {
         const dialogRef = this.dialog.open(SignupPageDialogComponent, {
             width: '95vw',
             maxWidth: '500px',
             autoFocus: false,
             maxHeight: '95vh',
-            
-            
-            
+
+
+
         })
         dialogRef.afterClosed().subscribe((data: any) => {
-            if(data) {
+            if (data) {
                 console.log(data)
                 const customer: Customer = {
                     firstName: data.firstName,
@@ -157,7 +157,7 @@ export class CheckoutComponent implements OnInit {
                     country: data.country,
                     orders: []
                 }
-                if(this.afAuth.idToken) {
+                if (this.afAuth.idToken) {
                     console.log('user present')
                 } else {
                     console.log('no user');
@@ -166,7 +166,8 @@ export class CheckoutComponent implements OnInit {
                     .then(uid => {
                         this.customerService.addCustomerDataToDb(uid, customer)
                             .then(data => {
-                                console.log('customer added to firestore db')})
+                                console.log('customer added to firestore db')
+                            })
                             .catch(err => console.log(err));
                     })
                     .catch(err => console.log(err));
@@ -182,32 +183,33 @@ export class CheckoutComponent implements OnInit {
             maxHeight: '90vh',
         })
         dialogRef.afterClosed().subscribe((loginData) => {
-            if(loginData) {
+            if (loginData) {
                 console.log(loginData)
                 this.authService.login(loginData.email, loginData.password)
-                .catch(err => {
-                    console.log(err)
-                    alert(err.message);
-                });
+                    .catch(err => {
+                        console.log(err)
+                        alert(err.message);
+                    });
             }
 
         })
     }
 
-    onUpdateCustomer(customer) {  
+    onUpdateCustomer(customer) {
         const dialogRef = this.dialog.open(SignupPageDialogComponent, {
             data: {
                 customer: customer
-            }});
+            }
+        });
         dialogRef.afterClosed().subscribe((customer: Customer) => {
-            if(customer) {
+            if (customer) {
                 this.afAuth.user.subscribe(user => {
                     this.customerService.updateCustomer(user.uid, customer).then(data => {
                         console.log(data);
                         this.acualizeCustomer()
                     })
                 })
-            } 
+            }
         })
     }
 }

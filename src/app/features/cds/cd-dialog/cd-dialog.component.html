@@ -6,7 +6,7 @@
         <div class="band-name">
             <span *ngIf="cd">{{cd.cdInfo.bandName}}</span>
         </div>
-        <div class="image-container">
+        <div *ngIf="parent != 'cds'" class="image-container">
             <img style="width:100%" [src]="cd.cdInfo.imageUrl" alt="" class="cd-cover">
         </div>
         <div class="title">
@@ -21,7 +21,7 @@
                     <div class="track-number">{{track.number}}</div>
                     <div class="track-title">{{track.title}}</div>
                 </div>
-                <div class="duration">
+                <div class="duration" *ngIf="track.minutes">
                     <div class="minutes">{{track.minutes}}</div>:
                     <div class="seconds">{{track.seconds|twodecimalpipe}}</div>
                 </div>
@@ -46,23 +46,29 @@
     </div>
     <div class="cd-info">
         <div class="recording-studio">
-            <span>Recording studio: </span><span *ngIf="cd">{{cd.cdInfo.recordingStudio}}</span>
+            <span>Recording studio: </span><span  *ngIf="cd">{{cd.cdInfo.recordingStudio}}</span>
         </div>
+        <hr>
         <div class="recording-engineer">
             <span>Recording engineer: </span><span *ngIf="cd">{{cd.cdInfo.recordingEngineer}}</span>
         </div>
+        <hr>
         <div class="mixer">
             <span>Mixed by: </span><span *ngIf="cd">{{cd.cdInfo.mixer}}</span>
         </div>
+        <hr>
         <div class="producer">
             <span>Producer: </span><span *ngIf="cd">{{cd.cdInfo.producer}}</span>
         </div>
+        <hr>
         <div class="publisher">
             <span>Publisher: </span><span *ngIf="cd">{{cd.cdInfo.publisher}}</span>
         </div>
+        <hr>
         <div class="recording-date">
             <span>Recording date: </span><span *ngIf="cd">{{cd.cdInfo.recordingDate | date}}</span>
         </div>
+        <hr>
     </div>
 </div>
 

@@ -1,0 +1,19 @@
+<div class="main-container">
+    <form [formGroup]="form">
+        <div class="form-field_button">
+            <mat-form-field>
+                <input
+                    formControlName="musicianName"
+                    type="text" matInput
+                    placeholder="enter musician">
+            </mat-form-field>
+            <button mat-raised-button (click)="onSearch()">
+                <mat-icon>search</mat-icon>
+            </button>
+        </div>
+    </form>
+    <div class='icon-container'>
+        <div class="filler"></div>
+        <mat-icon (click)="onClose()">close</mat-icon>
+    </div>
+</div>

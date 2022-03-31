@@ -15,6 +15,7 @@ import { CheckoutService } from './../../checkout/checkout.service';
 export class HeaderComponent implements OnInit {
 
   @Output() sidenavToggle = new EventEmitter<void>()
+  @Output() toggleFilter = new EventEmitter<void>()
 
   constructor(
     private router: Router,
@@ -49,6 +50,10 @@ export class HeaderComponent implements OnInit {
   onMenu() {
     console.log('onMenu')
     this.sidenavToggle.emit();
+  }
+  onFilter() {
+    console.log('filter');
+    this.toggleFilter.emit();
   }
   onLogOut() {
     this.authService.logout();

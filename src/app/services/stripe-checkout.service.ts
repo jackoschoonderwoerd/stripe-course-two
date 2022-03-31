@@ -3,7 +3,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CheckoutSession } from './../model/checkout-session.model'
+import { CheckoutSession } from '../model/checkout-session.model'
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { filter, first } from 'rxjs/operators';
@@ -17,7 +17,7 @@ declare const Stripe;
   providedIn: 'root'
 })
 
-export class CheckoutService {
+export class StripeCheckoutService {
 
   private jwtAuth: string;
 

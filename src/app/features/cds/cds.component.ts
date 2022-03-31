@@ -81,10 +81,12 @@ export class CdsComponent implements OnInit {
     onCdInfo(cd) {
         console.log(cd);
         this.dialog.open(CdDialogComponent, {
-            width: '25rem',
-            data: {cd},
+            width: '400px',
+            
+            data: {cd, parent: 'cds'},
             autoFocus: false,
             maxHeight: '90vh',
+            panelClass: 'dialog-container-custom'
             
         })
     }

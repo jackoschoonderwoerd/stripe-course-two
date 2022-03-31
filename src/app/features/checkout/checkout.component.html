@@ -56,17 +56,39 @@
                 cartItem.cd.cdInfo.price|currency:'EUR'}}</div>
             <hr>
         </li>
-        <li class="grandTotal" *ngIf="grandTotal > 0">Total: {{grandTotal|currency:'EUR'}}</li>
+        <mat-radio-group
+            class="shipping-options"
+            (change)="onShippingOptionChange($event)">
+            <mat-radio-button
+                class="shipping-option"
+                value="shipping"
+                checked="true">
+                <span>mail</span>
+            </mat-radio-button>
+            <mat-radio-button
+                (click)="onPickUp()"
+                class="shipping-option"
+                value="pickUp">
+                <span>pick up</span>
+                
+            </mat-radio-button>
+        </mat-radio-group>
+
         
-        <li class="showShippingCosts" *ngIf="showShippingCosts">
-            <!-- <div class="shippingCosts">
-                Shipping: {{shippingCosts|currency:"EUR"}}
-            </div> -->
-            <div class="grandTotalWithShipping">
-                {{grandTotalWithShipping|currency:"EUR"}}
-            </div>
+
+        <li class="totalCds" *ngIf="totalCds > 0">Total Cds: {{totalCds|currency:'EUR'}}</li>
+        <li class="shipping-costs">
+            <span>Shipping Costs:</span>{{shippingCosts|currency:'EUR'}}
         </li>
-        
+        <li class="total">
+            <hr>
+            <span>Total: </span>
+            {{(totalCds + shippingCosts)|currency:'EUR'}}
+        </li>
+
+
+
+
     </ul>
     <div class="check-in_sign-up">
         <div *ngIf="!(customer$|async)" class="new-customer">
@@ -82,11 +104,10 @@
     <!-- <button *ngIf="cartItems.length > 0 && customer$|async " mat-raised-button (click)="onContinue()" ><a >Continue</a> </button> -->
     <div *ngIf="customer$" class="delivery_check_place-order">
 
-        <div class="delivery-container" *ngIf="delivery">
+        <!-- <div class="delivery-container">
             <mat-radio-group class="delivery-radio-group"
-                
                 (change)="onRadioChange($event)">
-                <mat-radio-button value="pickUp"> 
+                <mat-radio-button value="pickUp">
                     pick up
                 </mat-radio-button>
                 <mat-radio-button value="byMail" [checked]="byMail">
@@ -94,7 +115,7 @@
                 </mat-radio-button>
             </mat-radio-group>
             <div class="delivery">delivery: {{delivery}}</div>
-        </div>
+        </div> -->
 
         <mat-checkbox
             class="check"

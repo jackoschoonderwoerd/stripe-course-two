@@ -10,7 +10,8 @@ import { Cd } from 'app/core/interfaces/cd';
 export class CdDialogComponent implements OnInit {
 
 
-    cd: Cd
+    cd: Cd;
+    parent: string
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
@@ -20,7 +21,9 @@ export class CdDialogComponent implements OnInit {
 
 
     ngOnInit(): void {
-        this.cd = this.data.cd
+        this.cd = this.data.cd,
+        this.parent = this.data.parent
+        console.log(this.parent)
     }
     onNoClick() {
         this.ngZone.run(() => {

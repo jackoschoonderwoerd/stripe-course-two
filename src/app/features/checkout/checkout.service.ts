@@ -85,6 +85,7 @@ export class CheckoutService {
     updateLocalStorage() {
         localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
     }
+    
     checkLocalStorageAfterReboot() {
         if(localStorage.getItem('cartItems')) {
             this.cartItems = JSON.parse(localStorage.getItem('cartItems'));
@@ -94,9 +95,9 @@ export class CheckoutService {
         }
     }
     emptyCart() {
+        console.log('emptying cart');
         this.cartItems = [];
         this.cartItemsChanged.emit(this.cartItems);
         console.log('emptied cart', this.cartItems);
     }
-
 }

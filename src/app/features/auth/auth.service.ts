@@ -97,7 +97,6 @@ export class AuthService {
             .snapshotChanges()
             .pipe(
                 map((snaps: any) => {
-                    console.log(snaps.payload.data().firstName);
                     const customer: Customer = {
                         firstName: snaps.payload.data().firstName,
                         lastName: snaps.payload.data().lastName,

@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
     isLoggedOut$: Observable<boolean>;
 
     pictureUrl$: Observable<string>;
-
+    showFilter: boolean = false
     cartItemsLength: number = 0;
 
     constructor(
@@ -84,4 +84,8 @@ export class AppComponent implements OnInit {
         this.router.navigate(['/checkout'])
     }
 
+    toggleFilter() {
+        console.log('toggle');
+        this.showFilter = !this.showFilter
+    }
 }

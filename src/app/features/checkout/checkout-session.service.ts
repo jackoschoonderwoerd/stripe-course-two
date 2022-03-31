@@ -29,7 +29,8 @@ export class CheckoutSessionService {
 
     startCdsCheckoutSession(
         cdId: string,
-        cartItems: CartItem[]
+        cartItems: CartItem[],
+        shippingCosts: number
     ): Observable<CheckoutSession> {
 
         const cdIdsAndQuantities: CdIdQuantity[] = [];
@@ -52,7 +53,8 @@ export class CheckoutSessionService {
             // cdId: cdId,
             // cartItems,
             cdIdsAndQuantities,
-            callbackUrl: this.buildCallbackUrl()
+            callbackUrl: this.buildCallbackUrl(),
+            shippingCosts
         }, { headers })
     }
 

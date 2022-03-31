@@ -21,6 +21,9 @@
             {{cartItemsLength}}
         </div>
     </div>
+    <div class="filter" (click)="onFilter()">
+        <mat-icon>search</mat-icon>
+    </div>
     <div *ngIf="customer" class="logout" (click)="onLogOut()">
         <button mat-icon-button>
             <mat-icon>exit_to_app</mat-icon>

@@ -27,7 +27,8 @@ export interface CartItem {
 }
 
 interface RequestInfo {
-    cdIdsAndQuantities
+    cdIdsAndQuantities;
+    shippingCosts: number;
     // cartItems: CartItem[]
     // cdId: string
     callbackUrl: string;
@@ -38,12 +39,13 @@ interface RequestInfo {
 
 export async function createCheckoutCdSession(req: Request, res: Response) {
 
-    console.log('[COCdR 26]: createCheckoutCdSession invoked');
+    console.log('[COCdR 26]: createCheckoutCdSession invoked', req.body.shippingCosts);
 
     try {
 
         const info: RequestInfo = {
             cdIdsAndQuantities: req.body.cdIdsAndQuantities,
+            shippingCosts: req.body.shippingCosts,
             // cartItems: req.body.cartItems,
             // cdId: req.body.cdId,
             callbackUrl: req.body.callbackUrl,
@@ -56,6 +58,7 @@ export async function createCheckoutCdSession(req: Request, res: Response) {
             return;
         }
 
+        
 
         const purchaseSession = await db.collection('purchaseSessions').doc();
         const checkoutSessionData: any = {
@@ -87,7 +90,7 @@ export async function createCheckoutCdSession(req: Request, res: Response) {
             const lineItems = await addDataToIdAndQuantity(req.body.cdIdsAndQuantities)
                 .then((cdsWithQuantity: any) => {
                     console.log('cd: 57 cdsWithQuantity ', cdsWithQuantity)
-                    return createLineItems(cdsWithQuantity.cds)
+                    return createLineItems(cdsWithQuantity.cds, req.body.shippingCosts)
                 })
                 .catch(err => console.log('[COR 94]', err));
 
@@ -97,7 +100,8 @@ export async function createCheckoutCdSession(req: Request, res: Response) {
                 // cd,
                 lineItems,
                 purchaseSession.id,
-                stripeCustomerId
+                stripeCustomerId,
+                
             )
         }
 
@@ -129,7 +133,7 @@ function setupPurchaseCdSession(info: RequestInfo, lineItems, sessionId: string,
             grandTotal: 45
         }
     }
-    // console.log('[COR 143]', config);
+    console.log('[COR 143]', config.success_url);
 
     if (stripeCustomerId) {
         config.customer = stripeCustomerId
@@ -137,7 +141,9 @@ function setupPurchaseCdSession(info: RequestInfo, lineItems, sessionId: string,
     return config
 }
 
-function createLineItems(cdsWithQuantity) {
+function createLineItems(cdsWithQuantity, shippingCosts) {
+
+    console.log('[CO 146]shippingCosts', shippingCosts);
 
     let lineItems = []
     cdsWithQuantity.forEach((cdWithQuantity: any) => {
@@ -150,7 +156,14 @@ function createLineItems(cdsWithQuantity) {
             quantity: cdWithQuantity.quantity
         })
     })
-    // console.log('[165]: ', lineItems);
+    lineItems.push({
+        name: 'Shipping Costs',
+        description: 'Shipping Costs',
+        amount: shippingCosts * 100,
+        currency: "eur",
+        quantity: 1
+    })
+    console.log('[165]: ', lineItems);
     return lineItems;
 }
 

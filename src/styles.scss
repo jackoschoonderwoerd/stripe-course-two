@@ -16,6 +16,12 @@
 dialog { 
   border: none !important;
 }
+
+.dialog-container-custom .mat-dialog-container {
+	padding: .3rem;
+	background: white;
+}
+
 body {
   padding: 0;
   margin: 0;

@@ -3,9 +3,12 @@
       <sidenav (closeSidenav)="sidenav.close()"></sidenav>
     </mat-sidenav>
     <mat-sidenav-content>
-      <header (sidenavToggle)="sidenav.toggle()"></header>
+      <header
+        (sidenavToggle)="sidenav.toggle()"
+        (toggleFilter)="toggleFilter()"></header>
       <div class="filler"></div>
       <main>
+        <filter *ngIf="showFilter" (closeFilter)="toggleFilter()"></filter>
         <router-outlet></router-outlet>
       </main>
     </mat-sidenav-content> 
