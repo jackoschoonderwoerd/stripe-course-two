@@ -29,7 +29,10 @@ export class AddCdComponent implements OnInit {
     exportMusicianIndex: number;
     oneFormOpened: boolean = false
     imageUrl: string;
-    cdId: string
+    cdId: string;
+    doomedNamesegments: string[] = [
+        'van', 'de', 'der', 'op', 'ten', 'het', 'den', 'ter'
+    ]
     
     constructor(
         private dialog: MatDialog,
@@ -67,7 +70,8 @@ export class AddCdComponent implements OnInit {
 
                 },
                 tracks: [],
-                musicians: []
+                musicians: [],
+                queryStrings: []
             }
         }
     }
@@ -162,6 +166,17 @@ export class AddCdComponent implements OnInit {
 
     onAddCdToDb() {
         console.log(this.cd);
+        this.cd.musicians.forEach((musician) => {
+            this.cd.queryStrings.push(musician.name);
+            const nameSegments = musician.name.split(' ')
+            nameSegments.forEach((nameSegment: string) => {
+                console.log(nameSegment)
+                if((this.doomedNamesegments.indexOf(nameSegment) === -1)) {
+                    console.log(nameSegment);
+                    this.cd.queryStrings.push(nameSegment);
+                }
+            })
+        })
         if(this.editMode) {
             console.log('save edits', this.cd);
             this.cdsService.editCd(this.cd)

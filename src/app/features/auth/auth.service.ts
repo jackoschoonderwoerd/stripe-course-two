@@ -8,6 +8,7 @@ import { convertSnaps } from './../../services/db-utils'
 import { concatMap, finalize, catchError, last, tap, map } from 'rxjs/operators';
 import { CheckoutService } from './../checkout/checkout.service'
 import { Router } from '@angular/router';
+import { Order } from './../../core/interfaces/order'
 
 
 
@@ -110,6 +111,8 @@ export class AuthService {
                         country: snaps.payload.data().country,
                         orders: snaps.payload.data().orders
                     }
+                    customer.orders.sort((a: any, b: any) => {
+                        return a.dateOrdered > b.dateOrdered ? -1 : 1})
                     return customer
                 }
 

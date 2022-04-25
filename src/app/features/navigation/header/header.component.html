@@ -1,28 +1,24 @@
 <mat-toolbar>
     <div class="menu" (click)="onMenu()">
-        <mat-icon>menu</mat-icon>
-
+        <mat-icon [inline]="true">menu</mat-icon>
     </div>
     <div class="cds" routerLink="/cds">cds</div>
     <div
         *ngIf="customer"
-        class="account-circle_first-name"
+        class="customer-name"
         routerLink="/customer">
-        <div class="account-circle">
-            <!-- <mat-icon>account_circle</mat-icon> -->
-        </div>
-        <div class="first-name">{{customer.firstName}}</div>
+        {{customer.firstName}}
     </div>
-    <div *ngIf="cartItemsLength > 0" class="cart" routerLink="/checkout">
-        <div class="cart-icon">
-            <mat-icon>shopping_basket</mat-icon>
-        </div>
+    <div *ngIf="cartItemsLength > 0" class="cart-icon_cart-items" routerLink="/checkout">
+
+        <mat-icon>shopping_basket</mat-icon>
+
         <div class="cart-items">
             {{cartItemsLength}}
         </div>
     </div>
-    <div class="filter" (click)="onFilter()">
-        <mat-icon>search</mat-icon>
+    <div class="search" (click)="onFilter()">
+        <mat-icon [inline]="true">search</mat-icon>
     </div>
     <div *ngIf="customer" class="logout" (click)="onLogOut()">
         <button mat-icon-button>

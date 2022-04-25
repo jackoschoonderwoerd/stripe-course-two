@@ -103,9 +103,11 @@ export class AddCdInfoComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log( new Date(this.form.value.recordingDate._d).getTime());
+        // console.log( new Date(this.form.value.recordingDate._d).getTime());
         this.cd.cdInfo = this.form.value;
-        this.cd.cdInfo.recordingDate = new Date(this.form.value.recordingDate._d).getTime()
+        if(this.cd.cdInfo.recordingDate) {
+            this.cd.cdInfo.recordingDate = new Date(this.form.value.recordingDate._d).getTime()
+        }
         this.cd.cdInfo.imageUrl = this.imageUrl;
         console.log(this.cd)
         this.exportToParent.emit(this.cd)

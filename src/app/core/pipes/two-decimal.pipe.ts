@@ -11,7 +11,7 @@ export class TwoDecimalPipe implements PipeTransform {
     if(!seconds) {
       return '00';
     }
-    console.log(seconds);
+    // console.log(seconds);
     const secondsString = seconds.toString()
     if(secondsString.length !== 2) {
       return '0' + secondsString

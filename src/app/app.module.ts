@@ -36,6 +36,7 @@ import { FilterComponent } from './features/filter/filter.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,    
@@ -54,6 +55,7 @@ import { FilterComponent } from './features/filter/filter.component';
     StripeCheckoutComponent,
     PickUpInfoDialogComponent,
     FilterComponent,
+    
 
 
   ],
@@ -65,7 +67,6 @@ import { FilterComponent } from './features/filter/filter.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireStorageModule,
-    
     AngularFirestoreModule,
     HttpClientModule,
     AppMaterialModule

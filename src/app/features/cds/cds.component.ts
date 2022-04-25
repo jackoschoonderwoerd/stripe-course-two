@@ -9,6 +9,7 @@ import { AuthService } from '../auth/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from './../confirmation-dialog/confirmation-dialog.component'
 import { CdDialogComponent } from './cd-dialog/cd-dialog.component';
+import { of } from 'rxjs';
 
 @Component({
     selector: 'cds',
@@ -20,6 +21,7 @@ export class CdsComponent implements OnInit {
 
     cds$: Observable<Cd[]>;
     isAdmin: boolean = false;
+    queryOptions: string[] = [];
     
 
 
@@ -33,12 +35,13 @@ export class CdsComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        
         this.authService.isAdmin.subscribe((isAdmin: boolean) => {
             this.isAdmin = isAdmin;
             console.log(this.isAdmin)
         })
         this.cds$ = this.cdsService.getCds();
+
+        // this.cds$ = this.cdsService.getCdsByQueryString('')
 
 
         this.afAuth.user.subscribe(user => {
@@ -46,10 +49,19 @@ export class CdsComponent implements OnInit {
                 // console.log(user.uid);
                 if (user.uid === 'OsZTBYWyXnQQ7rzN0TIoAByDSCI3') {
                     this.isAdmin = true
-                    console.log(user.uid, this.isAdmin);
+                    // console.log(user.uid, this.isAdmin);
                 }
             }
         })
+        this.cdsService.selectedCds.subscribe((cds: Cd[]) => {
+            console.log(cds);
+            this.cds$ = of(cds);
+            // this.cds$.subscribe(
+            //     val => console.log(val),
+            //     error => console.log(error)
+            // )  
+        })
+        console.log(this.queryOptions)
     }
 
     reloadCds() {

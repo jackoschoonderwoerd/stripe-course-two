@@ -55,7 +55,9 @@ export class CustomerComponent implements OnInit {
         const dialogRef = this.dialog.open(SignupPageDialogComponent, {
             data: {
                 customer: customer
-            }
+            },
+            height: '100%',
+            minWidth: '300px'
         });
         dialogRef.afterClosed().subscribe((customer: Customer) => {
             if (customer) {

@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CdsMaterialModule } from './cds-material.module';
 import { CdDialogComponent } from './cd-dialog/cd-dialog.component';
 import { TwoDecimalPipe } from 'app/core/pipes/two-decimal.pipe';
+import { CapitalizeNamePipe } from 'app/core/pipes/capitalizeName.pipe';
 
 
 
@@ -14,7 +15,8 @@ import { TwoDecimalPipe } from 'app/core/pipes/two-decimal.pipe';
   declarations: [
     CdsComponent,
     CdDialogComponent,
-    TwoDecimalPipe
+    TwoDecimalPipe,
+    CapitalizeNamePipe
    
   ],
   imports: [

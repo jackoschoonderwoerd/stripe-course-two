@@ -1,164 +1,164 @@
-.header-container {
-    position: sticky;
-    background-color: white;
-    // height: 50px;
-    width: 100%;
-    top: 0px;
-    .header {
-        // text-align: center;
-        // border: 1px solid red;
-        padding: .3rem;
-        font-size: 1.3rem;
-        margin: .5rem;
-    }
-}
-.info-container {
-    
-    .band-name_image-container_title {
-        padding: 0.5rem;
-        background-color: #ccc;
-        margin-bottom: .3rem;
-        .band-name {
+.main {
+    .header-container {
+        // position: sticky;
+        // height: 50px;
+        width: 100%;
+        top: 0px;
+        background-color: white;
+        .header {
+            // border: 1px solid white;
+            // border-radius: 5px;
+            // text-align: center;
+            // border: 1px solid red;
             padding: 0.3rem;
             font-size: 1.3rem;
-            background-color: white;
-            margin-bottom: 0.5rem;
-            border-radius: 5px;
+            margin: 0.5rem;
         }
-        .image-container {
-            .cd-cover {
+    }
+    .info-container {
+        .band-name_image-container_title {
+            padding: 0.5rem;
+            background-color: #ccc;
+            margin-bottom: 0.3rem;
+            .band-name {
+                padding: 0.3rem;
+                font-size: 1.3rem;
+                background-color: white;
+                // margin-bottom: 0.5rem;
+                border-radius: 5px;
+            }
+            .image-container {
+                .cd-cover {
+                }
+            }
+            .title {
+                padding: 0.3rem;
+                font-size: 1.3rem;
+                background-color: white;
+                margin-bottom: 0.5rem;
+                border-radius: 5px;
             }
         }
-        .title {
-            padding: 0.3rem;
-            font-size: 1.3rem;
-            background-color: white;
-            margin-bottom: 0.5rem;
-            border-radius: 5px;
-        }
-    }
 
-    .tracks {
-        font-size: .9rem;
-        background: #ccc;
-        margin-bottom: 0.3rem;
-        padding: 0.5rem;
-        .track {
-            .number_title_duration {
-                display: flex;
-                justify-content: space-between;;
-                .number_title {
+        .tracks {
+            font-size: 0.9rem;
+            background: #ccc;
+            margin-bottom: 0.3rem;
+            padding: 0.5rem;
+            .track {
+                .number_title_duration {
                     display: flex;
-                    .track-number{
-                        margin-right: .5rem;
+                    justify-content: space-between;
+                    .number_title {
+                        display: flex;
+                        .track-number {
+                            margin-right: 0.5rem;
+                        }
+                        .track-title {
+                        }
                     }
-                    .track-title{}
+                    .duration {
+                        display: flex;
+                    }
                 }
-                .duration {
+                .composer_lyricist {
+                    font-style: italic;
+                    text-indent: 2rem;
                     display: flex;
+                    justify-content: space-between;
                 }
             }
-            .composer_lyricist {
-                font-style: italic;
-                text-indent: 2rem;;
+        }
+        .musicians {
+            font-size: 0.9rem;
+            background: #ccc;
+            padding: 0.5rem;
+            margin-bottom: 0.3rem;
+
+            .musician {
+                // border: 1px solid red;
                 display: flex;
                 justify-content: space-between;
+                .musician-name {
+                    // border: 1px solid green;
+                    display: flex;
+                }
+                .instruments {
+                    text-align: right;
+                    // border: 1px solid black;
+                    text-transform: capitalize;
+                    display: flex;
+                    list-style: none;
+                    font-style: italic;
+                    padding: 0;
+                    margin: 0;
+                    gap: 0.5rem;
+                    .instrument {
+                    }
+                }
             }
-           
         }
-    }
-    .musicians {
-        font-size: .9rem;
-        background: #ccc;
-        padding: 0.5rem;
-        margin-bottom: 0.3rem;
-        
-        .musician {
-            // border: 1px solid red;
-            display: flex;
-            justify-content: space-between;
-            .musician-name {
-                // border: 1px solid green;
+        .cd-info {
+            font-size: 0.9rem;
+            background: #ccc;
+            padding: 0.5rem;
+
+            .recording-studio {
                 display: flex;
+                justify-content: space-between;
+                span:nth-child(2) {
+                    font-style: italic;
+                    text-align: end;
+                }
             }
-            .instruments {
-                text-align: right;
-                // border: 1px solid black;
-                text-transform: capitalize;
+            hr {
+                margin: 0.2rem;
+            }
+            .recording-engineer {
                 display: flex;
-                list-style: none;
-                font-style: italic;
-                padding: 0;
-                margin:0;
-                gap: 0.5rem;
-                .instrument {
+                justify-content: space-between;
+                span:nth-child(2) {
+                    font-style: italic;
+                    text-align: end;
+                }
+            }
+            .mixer {
+                display: flex;
+                justify-content: space-between;
+                span:nth-child(2) {
+                    font-style: italic;
+                    text-align: end;
+                }
+            }
+            .producer {
+                display: flex;
+                justify-content: space-between;
+                span:nth-child(2) {
+                    font-style: italic;
+                    text-align: end;
+                }
+            }
+            .publisher {
+                display: flex;
+                justify-content: space-between;
+                span:nth-child(2) {
+                    font-style: italic;
+                    text-align: end;
+                }
+            }
+            .recording-date {
+                display: flex;
+                justify-content: space-between;
+                span:nth-child(2) {
+                    font-style: italic;
+                    text-align: end;
                 }
             }
         }
     }
-    .cd-info {
-        font-size: .9rem;
-        background: #ccc;
-        padding: 0.5rem;
-        
-        .recording-studio {
-            display: flex;
-            justify-content: space-between;
-            span:nth-child(2){
-                font-style: italic;
-                text-align: end;
-            }
-        }
-        hr {
-            margin:.2rem;
-            
-        }
-        .recording-engineer {
-            display: flex;
-            justify-content: space-between;
-            span:nth-child(2){
-                font-style: italic;
-                text-align: end;
-            }
-        }
-        .mixer {
-            display: flex;
-            justify-content: space-between;
-            span:nth-child(2){
-                font-style: italic;
-                text-align: end;
-            }
-        }
-        .producer {
-            display: flex;
-            justify-content: space-between;
-            span:nth-child(2){
-                font-style: italic;
-                text-align: end;
-            }
-        }
-        .publisher {
-            display: flex;
-            justify-content: space-between;
-            span:nth-child(2){
-                font-style: italic;
-                text-align: end;
-            }
-        }
-        .recording-date {
-            display: flex;
-            justify-content: space-between;
-            span:nth-child(2){
-                font-style: italic;
-                text-align: end;
-            }
-        }
-
+    .dialog-close-button-container {
+        // border: 1px solid red;
+        display: flex;
+        justify-content: space-between;
     }
-    
-}
-.dialog-close-button-container {
-    // border: 1px solid red;
-    display: flex;
-    justify-content: space-between;
 }

@@ -23,11 +23,14 @@ export class CdDialogComponent implements OnInit {
     ngOnInit(): void {
         this.cd = this.data.cd,
         this.parent = this.data.parent
-        console.log(this.parent)
     }
     onNoClick() {
         this.ngZone.run(() => {
             this.dialogRef.close();
         })
+    }
+    onClose() {
+        console.log('close')
+        this.dialogRef.close();
     }
 }

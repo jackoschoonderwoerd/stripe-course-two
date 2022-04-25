@@ -42,6 +42,30 @@ repo: https://github.com/angular-university/stripe-course/blob/master/server/ser
 51.01 "gcloud app deploy"
 52.02 enable cloud build api
 
+******** CLI **********
+npm run start
+./stripe listen --forward-to localhost:9000/stripe-webhooks
+server/ npm run server
+server/gcloud app deploy
+gcloud app logs tail -s default
+**********************
+
+********* TEST => LIVE **********
+./stripe listen --forward-to localhost:9000/stripe-webhooks
+
+from live to local:
+
+stripe: disable hosted endpoint webhooks
+
+env:
+
+enable LOCAL: STRIPE_WEBHOOK_KEY
+
+disable: LIVE: STRIPE_WEBHOOK_KEY
+**************************************
+
+gcloud log: gcloud app logs tail -s default
+
 descriptor:                  [C:\Angular\COURSES\UDEMY\STRIPE-IN-PRACTICE\stripe-course-sandbox\server\app.yaml]
 source:                      [C:\Angular\COURSES\UDEMY\STRIPE-IN-PRACTICE\stripe-course-sandbox\server]
 target project:              [stripe-course-sandbox]

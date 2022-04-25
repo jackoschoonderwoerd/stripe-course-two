@@ -11,7 +11,8 @@ import { Musician } from '../interfaces/musician';
 })
 export class CdsService {
 
-    @Output() selectedCds = new EventEmitter<Cd[]>()
+    @Output() selectedCds = new EventEmitter<Cd[]>();
+    @Output() queryOptionsEmitter = new EventEmitter<string[]>();
 
     constructor(
         private db: AngularFirestore
@@ -31,7 +32,7 @@ export class CdsService {
 
     getCdById(id: string) {
         console.log(id);
-        
+
         return this.db.collection('cds').doc(id).ref.get()
             .then((doc: any) => {
                 if (doc) {
@@ -48,11 +49,10 @@ export class CdsService {
 
     }
 
-    getCdsByIds(ids: string[]) {
-        
-    }
+
 
     addCd(cd: Cd): Promise<firebase.firestore.DocumentReference> {
+        console.log(cd);
         return this.db.collection('cds').add(cd)
     }
 
@@ -73,44 +73,48 @@ export class CdsService {
         return this.db.collection('cds').doc(id).delete();
     }
 
-    getCdsByMusicanName (name: string) {
-        console.log()
-        // this.db.collection(
-        //     'cds',
-        //     ref => ref.where('cdInfo.bandName', '==', 'Victor de Boo')
-        //     ).get()
-        //     .subscribe(snaps => {
-        //         snaps.forEach(snap => {
-        //             console.log(snap.id);
-        //             console.log(snap.data())
-        //         });
-        //     })
+    getCdsByQueryString(queryString: string) {
+        queryString = queryString.toLowerCase()
+        console.log(queryString)
         return this.db.collection(
             'cds',
-            // ref => ref.where('musicians', 'array-contains', 'kaas'))
-            )
+            // ref => ref.where('musicians.name', '==', 'Victor de Boo'))
+            ref => ref.where('queryStrings', 'array-contains', queryString))
             .get()
             .subscribe(snaps => {
-                console.log(snaps);
-                let cds = []
-                snaps.forEach((snap) => {
+                let cds: Cd[] = []
+                snaps.forEach((snap: any) => {
+
                     console.log(snap.id);
-                    console.log(snap.data());
-                    cds.push(snap.data());
-                })
-                console.log(cds)
-                let selectedCds = []
-                cds.forEach((cd: Cd) => {
-                    cd.musicians.forEach((musician: Musician) => {
-                        if (musician.name === name) {
-                            selectedCds.push(cd)
+                    console.log(snap.data())
+                    cds.push({
+                        id: snap.id,
+                        ...snap.data()
+                    })
+                });
+                console.log(cds);
+                this.selectedCds.emit(cds);
+
+            })
+    }
+    getAllQueryOptions() {
+        let queryOptions: string[] = [];
+        this.db.collection('cds')
+            .get()
+            .subscribe(snaps => {
+                snaps.forEach((snap => {
+                    
+                    const queryStrings: string[] = snap.data().queryStrings
+                    queryStrings.forEach((queryString: string) => {
+                        if(queryOptions.indexOf(queryString) == -1 ) {
+                            queryOptions.push(queryString)
                         }
                     })
-                })
-                console.log(selectedCds)
-                this.selectedCds.emit(selectedCds);
-                return selectedCds;
+                }))
+                this.queryOptionsEmitter.emit(queryOptions);
             })
-    
+            
+            
+
     }
 }

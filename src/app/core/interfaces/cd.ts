@@ -23,6 +23,7 @@ export interface Cd {
     cdInfo: CdInfo;
     tracks: Track[]
     musicians: Musician[]
+    queryStrings?: string[]
 }
 
 // export interface Cd {

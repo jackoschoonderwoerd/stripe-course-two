@@ -28,7 +28,7 @@ export function initServer() {
     // 11.04 create route and create a response that will be sent back to the client that will be displayed in the browser, so that we can see that the server is active
     app.route('/').get((req, res) => {
 
-        res.status(200).send('<h1>API is up and running! version 11</h1>');
+        res.status(200).send('<h1>API is up and running! version 12</h1>');
     });
 
     // 12.04 create checkout route

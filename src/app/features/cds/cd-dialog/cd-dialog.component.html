@@ -1,87 +1,90 @@
 <!-- <div class="id">
     <span>Id: </span>{{cd.id}}
 </div> -->
-<div class="header-container">
-    <div class="header">
-        <span *ngIf="cd">{{cd.cdInfo.title}}</span>
+<div class="main" (click)="onClose()">
+
+    <div class="header-container">
+        <div class="header">
+            <span *ngIf="cd">{{cd.cdInfo.title}}</span>
+        </div>
     </div>
-</div>
-<div class="info-container">
-    <div class="band-name_image-container_title">
-        <div class="band-name">
-            <span *ngIf="cd">{{cd.cdInfo.bandName}}</span>
-        </div>
-        <div *ngIf="parent != 'cds'" class="image-container">
-            <img style="width:100%" [src]="cd.cdInfo.imageUrl" alt="" class="cd-cover">
-        </div>
-        <!-- <div class="title">
+    <div class="info-container">
+        <div class="band-name_image-container_title">
+            <div class="band-name">
+                <span *ngIf="cd">{{cd.cdInfo.bandName}}</span>
+            </div>
+            <div *ngIf="parent != 'cds'" class="image-container">
+                <img style="width:100%" [src]="cd.cdInfo.imageUrl" alt="" class="cd-cover">
+            </div>
+            <!-- <div class="title">
             <span *ngIf="cd">{{cd.cdInfo.title}}</span>
         </div> -->
-    </div>
+        </div>
 
-    <div class="tracks">
-        <div class="track" *ngFor="let track of cd.tracks">
-            <div class="number_title_duration">
-                <div class="number_title">
-                    <div class="track-number">{{track.number}}</div>
-                    <div class="track-title">{{track.title}}</div>
+        <div class="tracks">
+            <div class="track" *ngFor="let track of cd.tracks">
+                <div class="number_title_duration">
+                    <div class="number_title">
+                        <div class="track-number">{{track.number}}</div>
+                        <div class="track-title">{{track.title}}</div>
+                    </div>
+                    <div class="duration" *ngIf="track.minutes">
+                        <div class="minutes">{{track.minutes}}</div>:
+                        <div class="seconds">{{track.seconds|twodecimalpipe}}</div>
+                    </div>
                 </div>
-                <div class="duration" *ngIf="track.minutes">
-                    <div class="minutes">{{track.minutes}}</div>:
-                    <div class="seconds">{{track.seconds|twodecimalpipe}}</div>
+                <div class="composer_lyricist">
+                    <div class="composer">{{track.composer}}</div>
+                    <div class="lyricist">{{track.lyricist}}</div>
                 </div>
-            </div>
-            <div class="composer_lyricist">
-                <div class="composer">{{track.composer}}</div>
-                <div class="lyricist">{{track.lyricist}}</div>
             </div>
         </div>
-    </div>
-    <div class="musicians">
-        <div class="musician" *ngFor="let musician of cd.musicians">
-            <div class="musician-name">{{musician.name}}
-            </div>
-            <ul class="instruments">
-                <li *ngFor="let instrument of musician.instruments" class="instrument">
-                    {{instrument}}
-                </li>
-            </ul>
+        <div class="musicians">
+            <div class="musician" *ngFor="let musician of cd.musicians">
+                <div class="musician-name">{{musician.name|capitalizename}}
+                </div>
+                <ul class="instruments">
+                    <li *ngFor="let instrument of musician.instruments" class="instrument">
+                        {{instrument}}
+                    </li>
+                </ul>
 
+            </div>
         </div>
-    </div>
-    <div class="cd-info">
-        <div class="recording-studio">
-            <span>Recording studio: </span><span *ngIf="cd">{{cd.cdInfo.recordingStudio}}</span>
-        </div>
-        <hr>
-        <div class="recording-engineer">
-            <span>Recording engineer: </span><span *ngIf="cd">{{cd.cdInfo.recordingEngineer}}</span>
-        </div>
-        <hr>
-        <div class="mixer">
-            <span>Mixed by: </span><span *ngIf="cd">{{cd.cdInfo.mixer}}</span>
-        </div>
-        <hr>
-        <div class="producer">
-            <span>Producer: </span><span *ngIf="cd">{{cd.cdInfo.producer}}</span>
-        </div>
-        <hr>
-        <ng-template *ngIf="cd.cdInfo.publisher">
-            <div class="publisher" >
-                <span>Publisher: </span><span >{{cd.cdInfo.publisher}}</span>
+        <div class="cd-info">
+            <div class="recording-studio">
+                <span>Recording studio: </span><span *ngIf="cd">{{cd.cdInfo.recordingStudio}}</span>
             </div>
             <hr>
-        </ng-template>
-        <div class="recording-date">
-            <span>Recording date: </span><span *ngIf="cd">{{cd.cdInfo.recordingDate | date}}</span>
+            <div class="recording-engineer">
+                <span>Recording engineer: </span><span *ngIf="cd">{{cd.cdInfo.recordingEngineer}}</span>
+            </div>
+            <hr>
+            <div class="mixer">
+                <span>Mixed by: </span><span *ngIf="cd">{{cd.cdInfo.mixer}}</span>
+            </div>
+            <hr>
+            <div class="producer">
+                <span>Producer: </span><span *ngIf="cd">{{cd.cdInfo.producer}}</span>
+            </div>
+            <hr>
+            <ng-template *ngIf="cd.cdInfo.publisher">
+                <div class="publisher">
+                    <span>Publisher: </span><span>{{cd.cdInfo.publisher}}</span>
+                </div>
+                <hr>
+            </ng-template>
+            <div class="recording-date">
+                <span>Recording date: </span><span *ngIf="cd">{{cd.cdInfo.recordingDate | date}}</span>
+            </div>
+            <hr>
         </div>
-        <hr>
     </div>
-</div>
 
-<div class="dialog-close-button-container">
-    <div class="filler"></div>
-    <button class="dialog-close-button" mat-button (click)="onNoClick()">
-        <mat-icon mat-dialog-close>close</mat-icon>
-    </button>
+    <div class="dialog-close-button-container">
+        <div class="filler"></div>
+        <button class="dialog-close-button" mat-button (click)="onNoClick()">
+            <mat-icon mat-dialog-close>close</mat-icon>
+        </button>
+    </div>
 </div>
