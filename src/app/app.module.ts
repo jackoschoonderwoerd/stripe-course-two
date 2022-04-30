@@ -33,6 +33,9 @@ import { SignupPageDialogComponent } from './features/auth/signup-page-dialog/si
 import { StripeCheckoutComponent } from './stripe-checkout/stripe-checkout.component';
 import { PickUpInfoDialogComponent } from './features/checkout/pick-up-info-dialog/pick-up-info-dialog.component';
 import { FilterComponent } from './features/filter/filter.component';
+import { HomeComponent } from './features/home/home.component';
+import { DisclaimerComponent } from './disclaimer/disclaimer.component';
+import { FooterComponent } from './features/navigation/footer/footer.component';
 
 
 
@@ -55,6 +58,9 @@ import { FilterComponent } from './features/filter/filter.component';
     StripeCheckoutComponent,
     PickUpInfoDialogComponent,
     FilterComponent,
+    HomeComponent,
+    DisclaimerComponent,
+    FooterComponent,
     
 
 

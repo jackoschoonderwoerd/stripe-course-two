@@ -1,0 +1,10 @@
+.page-container {
+    background-color: #ccc;
+    height: 100%;
+    padding: 1rem;
+    .close {
+        width: 100%;
+        display: flex;
+        justify-content: end;
+    }
+}

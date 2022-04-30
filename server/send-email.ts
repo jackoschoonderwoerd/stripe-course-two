@@ -4,22 +4,27 @@ import * as sgMail from '@sendgrid/mail';
 import { addDataToIdAndQuantity, CdDataQuantity, CdIdQuantity } from './addDataToIdAndQuantity';
 import { createEmail } from './createHtml';
 
+const fs = require("fs");
 
+// const pathToAttachment = `${__dirname}/attachment.pdf`;
+// const attachment = fs.readFileSync(pathToAttachment).toString("base64")
 
 const admin = require('firebase-admin');
 
-export async function sendEmail(userId: string, cds) {
+export async function sendEmail(userId: string, cds, shippingCosts) {
 
     // console.log('[SE 13]CDS: ', cds)
 
-    const cdsWithQuantity = await addDataToIdAndQuantity(cds)
+    const cdsWithQuantity = await addDataToIdAndQuantity(cds, shippingCosts)
 
     const customerData = await getDocData(`customers/${userId}`)
 
-    // console.log('SE 17: ', userData);
+    // console.log('SE 17: ', userData);shipping-costs
 
+    
 
     return admin.auth().getUser(userId)
+        
         .then((user: User) => {
             console.log('[SE 11] USER.EMAIL: ', user.email);
             // sgMail.setApiKey(process.env.SENDGRID_API)
@@ -31,7 +36,13 @@ export async function sendEmail(userId: string, cds) {
                 subject: 'muSubject',
                 text: 'myText',
                 // templateId: process.env.SENDGRID_TEMPLATE_ID,
-                html: createHtml(cdsWithQuantity, customerData)
+                html: createHtml(cdsWithQuantity, customerData, shippingCosts),
+                // attachments: [{
+                //     content: attachment,
+                //     filename: "attachment.pdf",
+                //     type: "application/pdf",
+                //     disposition: "attachment"
+                // }]
 
             };
             return sgMail.send(msg)
@@ -42,8 +53,8 @@ export async function sendEmail(userId: string, cds) {
 
 
 
-function createHtml(cdsWithQuantity, userData) {
-    return createEmail(cdsWithQuantity, userData )
+function createHtml(cdsWithQuantity, userData, shippingCosts) {
+    return createEmail(cdsWithQuantity, userData, shippingCosts)
 }
 
 

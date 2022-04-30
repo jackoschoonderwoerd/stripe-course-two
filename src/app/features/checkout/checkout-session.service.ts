@@ -32,26 +32,21 @@ export class CheckoutSessionService {
         cartItems: CartItem[],
         shippingCosts: number
     ): Observable<CheckoutSession> {
+        
+        console.log(cartItems, shippingCosts);
 
         const cdIdsAndQuantities: CdIdQuantity[] = [];
         cartItems.forEach((cartItem: CartItem) => {
-            // console.log(cartItem)
-            // console.log(cartItem.cd.id);
+
             cdIdsAndQuantities.push({ id: cartItem.cd.id, quantity: cartItem.quantity })
         })
-        // console.log('JWTAUTH: ', this.jwtAuth);
+
         const headers = new HttpHeaders().set("Authorization", this.jwtAuth);
 
-        // console.log(cdId)
-        // console.log(cartItems.length)
-        // console.log(this.buildCallbackUrl())
-        // console.log(environment.api.baseUrl);
 
 
 
         return this.http.post<CheckoutSession>(environment.api.baseUrl + "/api/checkout-cd", {
-            // cdId: cdId,
-            // cartItems,
             cdIdsAndQuantities,
             callbackUrl: this.buildCallbackUrl(),
             shippingCosts

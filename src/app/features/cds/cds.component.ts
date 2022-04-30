@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Cd } from 'app/core/interfaces/cd';
@@ -10,18 +10,21 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from './../confirmation-dialog/confirmation-dialog.component'
 import { CdDialogComponent } from './cd-dialog/cd-dialog.component';
 import { of } from 'rxjs';
+import { NavigationService } from '../navigation/navigation.service';
 
 @Component({
     selector: 'cds',
     templateUrl: './cds.component.html',
     styleUrls: ['./cds.component.scss']
 })
-export class CdsComponent implements OnInit {
+export class CdsComponent implements OnInit, OnDestroy {
 
 
     cds$: Observable<Cd[]>;
     isAdmin: boolean = false;
     queryOptions: string[] = [];
+    showCovers: boolean = false;
+    showList: boolean = true
     
 
 
@@ -32,15 +35,26 @@ export class CdsComponent implements OnInit {
         private checkoutService: CheckoutService,
         private authService: AuthService,
         private dialog: MatDialog,
+        private navigationService: NavigationService
     ) { }
 
     ngOnInit(): void {
         this.authService.isAdmin.subscribe((isAdmin: boolean) => {
             this.isAdmin = isAdmin;
-            console.log(this.isAdmin)
         })
         this.cds$ = this.cdsService.getCds();
-
+        this.cdsService.filterClosedEmitter.subscribe(() => {
+            this.cds$ = this.cdsService.getCds();
+        });
+        this.cdsService.setViewTypeEmitter.subscribe((viewType: string) => {
+            if(viewType === 'covers') {
+                this.showCovers = true;
+                this.showList = false
+            } else if(viewType === 'list') {
+                this.showCovers = false;
+                this.showList = true
+            }
+        })
         // this.cds$ = this.cdsService.getCdsByQueryString('')
 
 
@@ -95,11 +109,18 @@ export class CdsComponent implements OnInit {
         this.dialog.open(CdDialogComponent, {
             width: '400px',
             
-            data: {cd, parent: 'cds'},
+            data: {
+                cd,
+                parent: 'cds',
+                showList: this.showList
+            },
             autoFocus: false,
             maxHeight: '90vh',
             panelClass: 'dialog-container-custom'
             
         })
+    }
+    ngOnDestroy() {
+        this.navigationService.cdsViewOptionsVisible.emit(false);
     }
 }

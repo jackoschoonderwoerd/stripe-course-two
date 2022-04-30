@@ -1,101 +1,161 @@
 .page-container {
-    padding: 1rem;
-    background-color: #ccc;
-    .header {
-        font-weight: bold;
-        background-color: white;
+    background-color: #ccc;;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .main-container {
+        min-width: 320px;
+        max-width: 500px;
         padding: 1rem;
-        margin-bottom: 1rem;
-        
-    }
-    .customer {
-        background-color: white;
-        padding: 1rem;
-        margin-bottom: 1rem;
-        .customer-header {
+        background-color: #ccc;
+        .header {
             font-weight: bold;
+            background-color: white;
+            padding: 1rem;
+            margin-bottom: 1rem;
         }
-    }
-    .empty {
-        background-color: white;
-        padding: 1rem;
-    }
-    .cart-items {
-        list-style: none;
-        
-        background-color: white;
-        padding: 1rem;
-        .order-header {
-            font-weight: bold;
-        }
-        .cart-item {
-            .band-name_title {
-                display: flex;
-                gap: 1rem;
-                .band-name {}
-                .title {
-                    font-style: italic;
-                }
-            }
-            .price_quantity {
-                display: flex;
-                gap: 1rem;
-                .price {}
-                .quantity {}
-            }
-            .subtotal {}
-        }
-        .shipping-options {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: .3rem;
-            .shipping-option {
+        .customer {
+            background-color: white;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            .customer-header {
                 font-weight: bold;
             }
-        }
-        .pick-up-info {
-            padding: .3rem;
-            background-color: #ccc;
-            display: inline-block;
-            font-weight: bold;
-            }
-        .totalCds {
-            font-weight: bold;
-        }
-        .shipping-costs {
-            display: flex;
-            gap: .3rem;
-            font-weight: bold;
-        }
-        .total {
-            font-weight: bold;
-        }
-    }
-    .check-in_sign-up {
-        display: flex;
-        justify-content: space-between;
-    }
-    .delivery_check_place-order {
-        background-color: white;
-        padding: 1rem;
-        margin-bottom: 1rem;
-        
-        .delivery-container {
-            .delivery-radio-group {
-                mat-radio-button {
-                    display: block;
+            .check-customer-info {
+                .check-customer-info-text {
+                    // color: red;
                 }
             }
-            .delivery {}
         }
-        .check {
-            display: block;
+        .empty {
+            background-color: white;
+            padding: 1rem;
+        }
+        .cart-items {
+            list-style: none;
+
+            background-color: white;
+            padding: 1rem;
+            .order-header {
+                font-weight: bold;
+            }
+            .cart-item {
+                .band-name_title_price {
+                    // display: flex;
+                    gap: 1rem;
+                    .band-name {
+                    }
+                    .title_price {
+                        display: flex;
+                        justify-content: space-between;
+                        .title {
+                            text-indent: 1rem;
+                            font-style: italic;
+                        }
+                        .price {
+                        }
+                    }
+                }
+                .quantity_subtotal {
+                    display: flex;
+                    justify-content: space-between;
+
+                    .quantity {
+                    }
+                    .subtotal {
+                    }
+                }
+            }
+            .buttons {
+                // border: 1px solid red;
+                margin-top: 0.5rem;
+                display: flex;
+                gap: 1rem;
+                .minus-one {
+                }
+                .trash {
+                }
+                .plus-one {
+                }
+            }
+        }
+        .totals {
+            .total-cds {
+                display: flex;
+                justify-content: space-between;
+                // border: 1px solid red;
+            }
+            .shipping-options-radio {
+                // background-color: white;
+                // margin:  1rem 0;
+                // padding: 1rem;
+                .shipping-options {
+                    // justify-content: center;
+                    display: flex;
+                    gap: 1rem;
+                    margin-bottom: 0.3rem;
+                    .shipping-option-shipping {
+                        font-weight: bold;
+                    }
+                    .shipping-option-pickup {
+                        font-weight: bold;
+                        // align-items: center;
+                        // border: 1px solid red;
+                    }
+                }
+            }
+            .shipping-costs {
+                display: flex;
+                justify-content: space-between;
+            }
+            .total {
+                display: flex;
+                justify-content: space-between;
+                .amount {
+                    font-weight: bold;
+                }
+            }
+        }
+        .log-in_sign-up {
+            display: flex;
+            justify-content: space-between;
+            margin: 1rem 0;
+        }
+
+        .delivery_check_place-order {
+            margin: 1rem 0;
+            background-color: white;
+            padding: 1rem;
+            margin-bottom: 1rem;
+
+            .delivery-container {
+                .delivery-radio-group {
+                    mat-radio-button {
+                        display: block;
+                    }
+                }
+                .delivery {
+                }
+            }
+            .check {
+                display: block;
+            }
+        }
+        .sign-up-form {
+            max-width: 500px;
+            mat-form-field {
+                display: block;
+            }
         }
     }
-    .sign-up-form {
-        max-width: 500px;
-        mat-form-field {
-            display: block;
-        }
-    }
+}
+.checked {
+    color: green;
+}
+
+.checkbox-unchecked {
+    color: red;
+}
+.checkbox-checked {
+    color: green;
 }

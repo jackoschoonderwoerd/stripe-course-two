@@ -41,7 +41,7 @@ export class AuthService {
                 const uid = data.user.uid
                 this.db.collection('customers').doc(uid).get().subscribe(data => {
                     console.log(data.data());
-                    // this.customerChanged.emit(data.data())
+                    
                     this.emitCustomerData(uid)
                 })
                 return uid

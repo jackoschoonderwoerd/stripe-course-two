@@ -33,7 +33,8 @@ export class CheckoutComponent implements OnInit {
     totalWithShipping: number;
     customer$: Observable<Customer>
     purchaseStarted: boolean = false;
-    isChecked: boolean = false
+    isOrderCheckboxChecked: boolean = false
+    isCustomerInfoCheckboxChecked: boolean = false;
     // delivery: boolean = false;
     // byMail: boolean = true;
     // shippingCosts: boolean = true;
@@ -76,9 +77,13 @@ export class CheckoutComponent implements OnInit {
         })
     }
 
-    onCheckboxChange(event) {
+    onCustomerInfoCheckboxChange(event) {
+        this.isCustomerInfoCheckboxChecked = event.checked;
+    }
+
+    onOrderCheckboxChange(event) {
         // console.log(event)
-        this.isChecked = event.checked;
+        this.isOrderCheckboxChecked = event.checked;
     }
 
     onShippingOptionChange(e) {
@@ -136,12 +141,11 @@ export class CheckoutComponent implements OnInit {
         const dialogRef = this.dialog.open(SignupPageDialogComponent, {
             width: '95vw',
             maxWidth: '500px',
+            minWidth: '320px',
             autoFocus: false,
             maxHeight: '95vh',
-
-
-
         })
+
         dialogRef.afterClosed().subscribe((data: any) => {
             if (data) {
                 console.log(data)
@@ -199,7 +203,13 @@ export class CheckoutComponent implements OnInit {
         const dialogRef = this.dialog.open(SignupPageDialogComponent, {
             data: {
                 customer: customer
-            }
+            },
+            width: '95vw',
+            maxWidth: '500px',
+            minWidth: '320px',
+            autoFocus: false,
+            maxHeight: '95vh',
+
         });
         dialogRef.afterClosed().subscribe((customer: Customer) => {
             if (customer) {
@@ -211,5 +221,11 @@ export class CheckoutComponent implements OnInit {
                 })
             }
         })
+    }
+    getCustomerInfoCheckboxColor() {
+        return this.isCustomerInfoCheckboxChecked ? 'green' : 'red'; 
+    }
+    getOrderInfoCheckboxColor() {
+        return this.isOrderCheckboxChecked ? 'green' : 'red'; 
     }
 }

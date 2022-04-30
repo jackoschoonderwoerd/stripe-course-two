@@ -7,7 +7,7 @@
         <div class="band-name">
             <span *ngIf="cd">{{cd.cdInfo.bandName}}</span>
         </div>
-        <div class="image-container">
+        <div *ngIf="showCovers" class="image-container">
             <img [src]="cd.cdInfo.imageUrl" alt="N.A." class="cd-cover">
         </div>
 

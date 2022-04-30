@@ -1,0 +1,13 @@
+.list-container {
+    .close {
+        // border: 1px solid red;
+        width: 100%;
+        text-align: right;
+        cursor: pointer;
+        mat-icon {
+            margin-right: 1rem;
+            font-size: 1.5rem;;
+            
+        }
+    }
+}

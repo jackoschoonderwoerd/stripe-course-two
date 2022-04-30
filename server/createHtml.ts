@@ -3,35 +3,46 @@ import { auth } from "./auth"
 import { db } from "./database";
 import { CustomerData } from "./interfaces";
 
+export interface cdsWithoutId {
+    title: string;
+    bandName: string;
+    price: number;
+    quantity: number;
+}
+
 const row = html => `<tr>\n${html}</tr>\n`,
     heading = object => row(Object.keys(object).reduce((html, heading) => (html + `<th>${heading}</th>`), '')),
     datarow = object => row(Object.values(object).reduce((html, value) => (html + `<td class="alignRight">${value}</td>`), ''));
 
-export function createEmail(cdsWithQuantity: any, customerData) {
+export function createEmail(cdsWithQuantity: any, customerData, shippingCosts) {
     // console.log('[CH 11]: ', cdsWithQuantity, customerData)
     return `
             <p>Thank you for your order</p>
             ${createTable(cdsWithQuantity.cds)}
-            ${calculateTotalPrice(cdsWithQuantity.cds)}
+            <p>Shipping costs: ${shippingCosts.toFixed(2)}</p>
+            ${calculateTotalPrice(cdsWithQuantity.cds, shippingCosts)}
             
-            <p>Will be shiped to: </p>
+            <p>Orderd by: </p>
             ${createCustomer(customerData)}
           `
 }
 
 function createTable(cdsWithQuantity) {
+    
+
     return ` <table>
             ${heading(cdsWithQuantity[0])}
             ${cdsWithQuantity.reduce((html, object) => (html + datarow(object)), '')}
           </table>`
 }
 
-function calculateTotalPrice(cdsWithQuantity) {
+function calculateTotalPrice(cdsWithQuantity, shippingCosts) {
     let totalPrice: number = 0
     cdsWithQuantity.forEach((cd: any) => {
         totalPrice = totalPrice + cd.quantity * cd.price
     })
-    return `<h2>Total: &euro; ${totalPrice}</h2>`
+    totalPrice = totalPrice + shippingCosts;
+    return `<h2>Total: &euro; ${totalPrice.toFixed(2)}</h2>`
 }
 
 function createCustomer(customerData: CustomerData) {

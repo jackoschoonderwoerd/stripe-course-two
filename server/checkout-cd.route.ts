@@ -39,7 +39,7 @@ interface RequestInfo {
 
 export async function createCheckoutCdSession(req: Request, res: Response) {
 
-    // console.log('[COCdR 26]: createCheckoutCdSession invoked', req.body.shippingCosts);
+    console.log('[COR 26]: createCheckoutCdSession invoked', req.body.shippingCosts);
 
     try {
 
@@ -58,21 +58,25 @@ export async function createCheckoutCdSession(req: Request, res: Response) {
             return;
         }
 
-        
+        console.log('[COR 61] info', info)
 
         const purchaseSession = await db.collection('purchaseSessions').doc();
         const checkoutSessionData: any = {
             status: 'ongoing',
             created: Timestamp.now(),
-            userId: info.userId
+            userId: info.userId, 
+            
         }
 
         // if (info.cdIdsAndQuantities) {
         //     checkoutSessionData.cds = info.cdIdsAndQuantities;
         // }
 
-        if (info.cdIdsAndQuantities) {
+        if(info.cdIdsAndQuantities) {
             checkoutSessionData.cdIdsAndQuantities = info.cdIdsAndQuantities
+        }
+        if(info.shippingCosts) {
+            checkoutSessionData.shippingCosts = info.shippingCosts;
         }
         // console.log('[COCdR 54] CHECKOUTSESSIONDATA: ', checkoutSessionData);
 
@@ -87,7 +91,7 @@ export async function createCheckoutCdSession(req: Request, res: Response) {
             // console.log('[COR 90]: ', info.cdIdsAndQuantities);
             // const cd = await getDocData(`cds/${info.cdId}`);
 
-            const lineItems = await addDataToIdAndQuantity(req.body.cdIdsAndQuantities)
+            const lineItems = await addDataToIdAndQuantity(req.body.cdIdsAndQuantities, req.body.shippingCosts)
                 .then((cdsWithQuantity: any) => {
                     // console.log('cd: 57 cdsWithQuantity ', cdsWithQuantity)
                     return createLineItems(cdsWithQuantity.cds, req.body.shippingCosts)
@@ -163,7 +167,7 @@ function createLineItems(cdsWithQuantity, shippingCosts) {
         currency: "eur",
         quantity: 1
     })
-    // console.log('[165]: ', lineItems);
+    console.log('[COR 165]: ', lineItems);
     return lineItems;
 }
 

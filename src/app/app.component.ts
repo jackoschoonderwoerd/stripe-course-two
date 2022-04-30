@@ -9,6 +9,9 @@ import { CustomerService } from './core/services/customer.service';
 import { AuthService } from './features/auth/auth.service';
 import { User } from 'firebase';
 import { Customer } from './core/interfaces/customer';
+import { MatDialog } from '@angular/material/dialog';
+import { DisclaimerComponent } from './disclaimer/disclaimer.component';
+import { NavigationService } from './features/navigation/navigation.service';
 
 @Component({
     selector: 'app-root',
@@ -34,12 +37,24 @@ export class AppComponent implements OnInit {
         private checkoutService: CheckoutService,
         private router: Router,
         private customerService: CustomerService,
-        private authService: AuthService
+        private authService: AuthService,
+        private dialog: MatDialog,
+        private navigationService: NavigationService
     ) {
         // afAuth.idToken.subscribe(jwt => console.log(jwt))
     }
 
     ngOnInit() {
+        this.navigationService.showFilter.subscribe((showFilter: boolean) => {
+            this.showFilter = showFilter;
+            console.log(this.showFilter)
+        })
+
+        // this.dialog.open(DisclaimerComponent, {
+        //     height: '100vh',
+        //     minWidth: '320px',
+        //     maxWidth: '500px'
+        // });
         this.authService.customerChanged.subscribe((customer: Customer) => {
             this.customer = customer;
         });

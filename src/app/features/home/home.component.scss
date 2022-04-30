@@ -1,0 +1,29 @@
+.page-container {
+    height: calc(100vh - 64px);
+    background-color: #ccc;
+    // border: 1px solid green;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
+    .main {
+        background-color: white;
+        padding: 1rem;
+        // border: 1px solid red;
+        max-width: 500px;
+        min-width: 300px;
+        .header {
+            text-align: center;
+            font-size: 1.5rem;
+            text-transform: capitalize;
+            margin-bottom: 1rem;
+        }
+        img {
+            width: 100%;
+        }
+        .content {
+            text-align: left;
+            // border: 1px solid black;
+        }
+    }
+}

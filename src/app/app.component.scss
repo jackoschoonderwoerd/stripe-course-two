@@ -1,6 +1,6 @@
 mat-sidenav-container {
     mat-sidenav {
-
+        min-width: 16rem;
     }
     mat-sidenav-content {
         
@@ -14,9 +14,24 @@ mat-sidenav-container {
             background-color: red;
         }
         main {
+            // position: relative;
+            filter {
+                // top: 56px;
+                // width: 100%;
+                // position: fixed;
+                // z-index: 100;
+            }
             router-outlet {
 
             }
+        }
+        footer {
+            background-color: black;
+            color: white;
+            z-index: 100;
+            position:fixed;
+            width: 100%;
+            bottom:0;
         }
     }
 }

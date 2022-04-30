@@ -1,7 +1,17 @@
 <div class="list-container">
-  <mat-nav-list>
-    <a mat-list-item>home</a>
-    <a mat-list-item routerLink="cds">cds</a>
-    <a *ngIf="customer" mat-list-item (click)="onLogout()">logout</a>
-  </mat-nav-list>
+    <mat-nav-list>
+        <a
+            mat-list-item
+            [routerLink]="['/home']"
+            routerLinkActive="router-link-active"
+            (click)="onLinkSelected($event)">home</a>
+        <a
+            mat-list-item
+            routerLink="cds"
+            (click)="onLinkSelected($event)">cds</a>
+        <a
+            *ngIf="customer"
+            mat-list-item (click)="onLogout()">logout</a>
+    </mat-nav-list>
+    <div class="close" (click)="onClose()"><mat-icon>close</mat-icon></div>
 </div>

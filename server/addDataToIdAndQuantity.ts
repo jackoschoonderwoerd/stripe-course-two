@@ -17,7 +17,7 @@ export interface CdDataQuantity {
 }
 
 
-export function addDataToIdAndQuantity(cdIdsQuantities: CdIdQuantity[]) {
+export function addDataToIdAndQuantity(cdIdsQuantities: CdIdQuantity[], shippingCosts: number) {
     // console.log('[AD 25]: ', cdIdsQuantities);
     let cdsIdDataQuantity: CdDataQuantity[] = [];
     let grandTotal: number = 0
@@ -39,7 +39,7 @@ export function addDataToIdAndQuantity(cdIdsQuantities: CdIdQuantity[]) {
                     }
                 );
                 if(cdsIdDataQuantity.length == cdIdsQuantitiesLength) {
-                    // resolve(cdsIdDataQuantity);
+                    grandTotal = grandTotal + shippingCosts;
                     resolve({cds: cdsIdDataQuantity, grandTotal: grandTotal});
                 } 
             })

@@ -1,31 +1,42 @@
-<div class="main-container" fxLayout>
-    <mat-form-field>
-        
-        <input
-            placeholder="filter"
-            type="text"
-            matInput
-            [matAutocomplete]="auto"
-            [formControl]="myControl">
-        <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let option of filteredOptions | async" [value]="option" (change)="onOptionChanged()">
-                {{option}}
-            </mat-option>
-        </mat-autocomplete>
-    </mat-form-field>
-    <div class="buttons">
+<div class="main-container" fxLayout #mainContainer>
+    <div *ngIf="!queryString" class="filter-section">
+
+        <mat-form-field>
+            <input
+                placeholder="FILTER"
+                type="text"
+                matInput
+                [matAutocomplete]="auto"
+
+                [formControl]="myControl">
+            <mat-autocomplete #auto="matAutocomplete">
+
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    <span (click)="onOptionSelected(option)">{{option}}</span>
+                </mat-option>
+
+            </mat-autocomplete>
+        </mat-form-field>
+
         <button
-            class="search" 
-            [disabled]="!myControl.value" 
-            mat-raised-button 
+            #searchButton
+            class="search"
+
+            mat-mini-fab
+            color="primary"
             (click)="onSearch()">
-            <mat-icon>search</mat-icon>
+            <mat-icon [inline]="true">play_arrow</mat-icon>
         </button>
-        <button
-            (click)="onCloseFilter()" 
-            class="close" 
-            mat-raised-button>
-            <mat-icon>close</mat-icon>
-        </button>
+
     </div>
+    <div *ngIf="queryString" class="filter-result">
+        <div class="query-string">
+            <div class="">
+                Results for: <strong> {{queryString}}</strong>
+            </div>
+        </div>
+
+        <mat-icon (click)="onNewFilter()">replay</mat-icon>
+    </div>
+
 </div>

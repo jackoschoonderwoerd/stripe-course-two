@@ -11,7 +11,9 @@ export class CdDialogComponent implements OnInit {
 
 
     cd: Cd;
-    parent: string
+    parent: string;
+    showCover: boolean = false;
+
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
@@ -22,7 +24,11 @@ export class CdDialogComponent implements OnInit {
 
     ngOnInit(): void {
         this.cd = this.data.cd,
-        this.parent = this.data.parent
+        this.parent = this.data.parent;
+        console.log(this.data)
+        if(this.data.showList) {
+            this.showCover = true
+        }
     }
     onNoClick() {
         this.ngZone.run(() => {
