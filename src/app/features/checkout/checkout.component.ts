@@ -108,7 +108,7 @@ export class CheckoutComponent implements OnInit {
         // console.log(orderedCds);
         this.checkoutSessionService.startCdsCheckoutSession(
             '7bt0FfOSgnUMEKToerD9',
-            this.cartItems, 
+            this.cartItems,
             this.shippingCosts)
             .subscribe(
                 (session: CheckoutSession) => {
@@ -121,6 +121,10 @@ export class CheckoutComponent implements OnInit {
                 }
 
             )
+    }
+
+    orderMore() {
+        this.router.navigateByUrl('cds')
     }
 
     onContinue() {
@@ -154,7 +158,7 @@ export class CheckoutComponent implements OnInit {
                     lastName: data.lastName,
                     email: data.email,
                     street: data.street,
-                    zipCode: 'TODO',
+                    zipCode: data.zipCode,
                     houseNumber: data.houseNumber,
                     addition: data.addition,
                     city: data.city,
@@ -223,9 +227,9 @@ export class CheckoutComponent implements OnInit {
         })
     }
     getCustomerInfoCheckboxColor() {
-        return this.isCustomerInfoCheckboxChecked ? 'green' : 'red'; 
+        return this.isCustomerInfoCheckboxChecked ? 'green' : 'red';
     }
     getOrderInfoCheckboxColor() {
-        return this.isOrderCheckboxChecked ? 'green' : 'red'; 
+        return this.isOrderCheckboxChecked ? 'green' : 'red';
     }
 }

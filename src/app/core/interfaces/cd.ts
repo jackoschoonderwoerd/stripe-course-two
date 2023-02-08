@@ -15,15 +15,23 @@ export interface CdInfo {
     id?: string;
 }
 
+export interface Review {
+    content: string;
+    date?: number;
+    source: string;
+    author: string;
+}
+
 
 
 
 export interface Cd {
-    id?: string,
+    id?: string;
     cdInfo: CdInfo;
-    tracks: Track[]
-    musicians: Musician[]
-    queryStrings?: string[]
+    tracks: Track[];
+    musicians: Musician[];
+    queryStrings?: string[];
+    reviews?: Review[];
 }
 
 // export interface Cd {

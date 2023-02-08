@@ -1,0 +1,13 @@
+<div class="page-container" mat-dialog-close>
+  <div class="source_date">
+    <div *ngIf="review.source" class="source">{{review.source}}</div>&nbsp;
+    <div *ngIf="review.date" class=" date">{{review.date|date}}</div>
+  </div>
+  <div class="content">{{review.content}}</div>
+  <div *ngIf="review.author" class=" author">{{review.author}}</div>
+  <div class="close-window" (click)="onNoClick()">
+    <!-- <mat-icon mat-dialog-close>close</mat-icon> -->
+    <i class="fa-solid fa-xmark"></i>
+  </div>
+
+</div>

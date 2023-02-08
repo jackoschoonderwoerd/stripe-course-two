@@ -9,6 +9,7 @@ import { concatMap, finalize, catchError, last, tap, map } from 'rxjs/operators'
 import { CheckoutService } from './../checkout/checkout.service'
 import { Router } from '@angular/router';
 import { Order } from './../../core/interfaces/order'
+import { BehaviorSubject } from 'rxjs';
 
 
 
@@ -24,6 +25,8 @@ export class AuthService {
 
     uid: string
     cartItemsLength: number;
+    private isAdminSubject = new BehaviorSubject<boolean>(true);
+    public isAdmin$ = this.isAdminSubject.asObservable()
 
     constructor(
         private afAuth: AngularFireAuth,
@@ -41,7 +44,7 @@ export class AuthService {
                 const uid = data.user.uid
                 this.db.collection('customers').doc(uid).get().subscribe(data => {
                     console.log(data.data());
-                    
+
                     this.emitCustomerData(uid)
                 })
                 return uid
@@ -55,6 +58,7 @@ export class AuthService {
                 this.uid = data.user.uid
                 if (data.user.uid === 'OsZTBYWyXnQQ7rzN0TIoAByDSCI3') {
                     this.isAdmin.emit(true);
+                    this.isAdminSubject.next(true)
                 }
                 this.customerService.getCustomerByUid(data.user.uid);
                 this.emitCustomerData(data.user.uid);
@@ -112,7 +116,8 @@ export class AuthService {
                         orders: snaps.payload.data().orders
                     }
                     customer.orders.sort((a: any, b: any) => {
-                        return a.dateOrdered > b.dateOrdered ? -1 : 1})
+                        return a.dateOrdered > b.dateOrdered ? -1 : 1
+                    })
                     return customer
                 }
 

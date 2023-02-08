@@ -35,7 +35,7 @@ export class SignupPageDialogComponent implements OnInit {
             console.log(this.customer)
             this.signUpForm.patchValue({
                 ...this.customer,
-                password: '123'
+                password: 0
             })
             this.signUpForm.updateValueAndValidity()
            
@@ -46,14 +46,14 @@ export class SignupPageDialogComponent implements OnInit {
         this.signUpForm = this.fb.group({
             firstName: new FormControl(null, [Validators.required]),
             lastName: new FormControl(null, [Validators.required]),
-            email: new FormControl('jackoschoonderwoerd@yahoo.nl', [Validators.required]),
+            email: new FormControl(null, [Validators.required]),
             street: new FormControl(null, [Validators.required]),
             houseNumber: new FormControl(null, [Validators.required]),
-            addition: new FormControl(null, [Validators.required]),
+            addition: new FormControl(null),
             zipCode: new FormControl(null, [Validators.required]),
             city: new FormControl(null, [Validators.required]),
             country: new FormControl(null, [Validators.required]),
-            password: new FormControl('123456', [Validators.required]),
+            password: new FormControl(null, [Validators.required]),
         })
     }
 }

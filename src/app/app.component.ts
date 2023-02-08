@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
 
     customer: any;
 
-    
+
 
     isLoggedOut$: Observable<boolean>;
 
@@ -58,12 +58,12 @@ export class AppComponent implements OnInit {
         this.authService.customerChanged.subscribe((customer: Customer) => {
             this.customer = customer;
         });
-        if(localStorage.getItem('cartItems')) {
+        if (localStorage.getItem('cartItems')) {
             this.cartItemsLength = JSON.parse(localStorage.getItem('cartItems')).length
         } else {
             this.cartItemsLength = 0;
         }
-        if(localStorage.getItem('customer')) {
+        if (localStorage.getItem('customer')) {
             this.customer = JSON.parse(localStorage.getItem('customer'))
         }
         this.checkoutService.checkLocalStorageAfterReboot();
@@ -72,9 +72,9 @@ export class AppComponent implements OnInit {
 
             this.cartItemsLength = cartItems.length;
         })
-        
+
         this.afAuth.authState.subscribe(state => {
-            if(state) {
+            if (state) {
                 // console.log(state.uid);
 
                 this.customerService.getCustomerByUid(state.uid);

@@ -1,0 +1,26 @@
+.page-container {
+    padding: 0.5rem;
+    .source_date {
+        margin: 0.3rem 0;
+        background-color: var(--jazz-white);
+        display: flex;
+        padding: 0.3rem;
+    }
+    .content {
+        background-color: var(--jazz-white);
+        display: flex;
+        padding: 0.3rem;
+        margin-bottom: 0.3rem;
+    }
+    .author {
+        background-color: var(--jazz-white);
+        display: flex;
+        padding: 0.3rem;
+    }
+    .close-window {
+        font-size: 1.3rem;
+        padding: 0.5rem 1rem;
+        display: flex;
+        justify-content: end;
+    }
+}

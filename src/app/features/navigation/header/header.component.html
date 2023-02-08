@@ -1,75 +1,78 @@
 <mat-toolbar>
-    <div class="toolbar-content-left">
-        <div
-            class="home link"
-            routerLink="/home"
-            routerLinkActive="active-link"
-            routerLinkActiveOptions="{exact: true}"
-            (click)="onHome($event)">
-            <mat-icon>home</mat-icon>
-        </div>
+  <div class="toolbar-content-left">
+    <div
+      class="home link"
+      routerLink="/home"
+      routerLinkActive="active-link"
+      routerLinkActiveOptions="{exact: true}"
+      (click)="onHome($event)">
+      <i class="fas fa-home"></i>
+    </div>
+
+  </div>
+
+  <div class="toolbar-content-right">
+    <div
+      class="cd-container-container link"
+      *ngIf="!cdsViewOptionsVisible">
+      <div
+        class="cd-container"
+        routerLink="/cds"
+        (click)="cdsSelected()">
+        CD
+        <!-- <img src="'./../../../../../assets/cd-white.png" alt=""> -->
+      </div>
+    </div>
+    <div
+      class="filter_view-type link"
+      *ngIf="cdsViewOptionsVisible">
+      <div
+        class="filter"
+
+        [ngClass]="{filterActive: filterActive}"
+        (click)="onFilter()">
+        <mat-icon [inline]="true">search</mat-icon>
+      </div>
+      <div class="view-type">
+        <mat-icon
+          (click)="onViewType('covers')"
+          [inline]="true"
+          *ngIf="viewList">image
+        </mat-icon>
+        <mat-icon
+          (click)="onViewType('list')"
+          [inline]="true"
+          *ngIf="viewCovers">view_list
+        </mat-icon>
+      </div>
+    </div>
+    <div
+      *ngIf="customer"
+      class="customer-name link"
+      routerLink="/customer"
+      routerLinkActive="active-link"
+      (click)="onAccount($event)">
+      <i class="fa fa-user"></i>
+      <!-- {{customer.firstName.split('')[0].toUpperCase()}} -->
 
     </div>
-    
-    <div class="toolbar-content-right">
-        <div 
-            class="cd-container-container link"
-            *ngIf="!cdsViewOptionsVisible">
-            <div
-                class="cd-container"
-                routerLink="/cds"
-                (click)="cdsSelected()">
-                <img src="'./../../../../../assets/cd-white.png" alt="">
-            </div>
-        </div>
-        <div 
-            class="filter_view-type link"
-            *ngIf="cdsViewOptionsVisible">
-            <div
-                class="filter"
-                
-                [ngClass]="{filterActive: filterActive}"
-                (click)="onFilter()">
-                <mat-icon [inline]="true">search</mat-icon>
-            </div>
-            <div class="view-type">
-                <mat-icon
-                    (click)="onViewType('covers')"
-                    [inline]="true"
-                    *ngIf="viewList">image
-                </mat-icon>
-                <mat-icon
-                    (click)="onViewType('list')"
-                    [inline]="true"
-                    *ngIf="viewCovers">view_list
-                </mat-icon>
-            </div>
-        </div>
-        <div
-            *ngIf="customer"
-            class="customer-name link"
-            routerLink="/customer"
-            routerLinkActive="active-link"
-            (click)="onAccount($event)">
-            {{customer.firstName.split('')[0].toUpperCase()}}
-            <!-- .{{customer.lastName.split('')[0].toUpperCase()}} -->
-        </div>
-        <div
-            class="cart-icon_cart-items link"
-            *ngIf="cartItemsLength > 0"
-            routerLinkActive="active-link"
-            routerLink="/checkout"
-            (click)="onShoppingBasket($event)">
-            <mat-icon class="cart-icon" [inline]="true">shopping_basket</mat-icon>
-            <div class="cart-items">
-                {{cartItemsLength}}
-            </div>
-        </div>
-        <div *ngIf="customer" class="logout link" (click)="onLogOut()">
-            <!-- <button mat-icon-button> -->
-            <mat-icon [inline]="true">exit_to_app</mat-icon>
-            <!-- </button> -->
-        </div>
+    <div
+      class="cart-icon_cart-items link"
+      *ngIf="cartItemsLength > 0"
+      routerLinkActive="active-link"
+      routerLink="/checkout"
+      (click)="onCart($event)">
+      <i class="fas fa-shopping-cart"></i>
+      <!-- <mat-icon class="cart-icon" [inline]="true">shopping_basket</mat-icon> -->
+      <div class="cart-items" [ngStyle]="{'color': cartSelected === true ? 'var(--jazz-black)' : 'var(--jazz-orange)'}">
+        {{cartItemsLength}}
+      </div>
     </div>
+    <div *ngIf="customer" class="logout link" (click)="onLogOut()">
+      <!-- <button mat-icon-button> -->
+      <mat-icon [inline]="true">exit_to_app</mat-icon>
+      <!-- </button> -->
+    </div>
+  </div>
 
 </mat-toolbar>

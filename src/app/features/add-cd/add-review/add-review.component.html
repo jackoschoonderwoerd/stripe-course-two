@@ -1,0 +1,26 @@
+<div class="form-container">
+  <div class="form-header">reviews</div>
+  <form [formGroup]="form">
+    <mat-form-field>
+      <input formControlName="date"
+        matInput [matDatepicker]="picker" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="text" matInput formControlName="author" placeholder="author">
+    </mat-form-field>
+    <mat-form-field>
+      <input type="text" matInput formControlName="source" placeholder="source">
+    </mat-form-field>
+    <textarea
+      placeholder="add html"
+      rows="20"
+      cols="30"
+      formControlName="content">
+    </textarea>
+    <button (click)="addReview()" [disabled]="form.invalid">{{editmode ? 'save edits' : 'add review'}}</button>
+
+    <button (click)="onCancel()">cancel</button>
+  </form>
+</div>

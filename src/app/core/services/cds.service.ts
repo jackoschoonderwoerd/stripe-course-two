@@ -53,8 +53,6 @@ export class CdsService {
 
     }
 
-
-
     addCd(cd: Cd): Promise<firebase.firestore.DocumentReference> {
         console.log(cd);
         return this.db.collection('cds').add(cd)
@@ -65,7 +63,9 @@ export class CdsService {
         const myCd: Cd = {
             cdInfo: cd.cdInfo,
             tracks: cd.tracks,
-            musicians: cd.musicians
+            musicians: cd.musicians,
+            queryStrings: cd.queryStrings,
+            reviews: cd.reviews
         }
         return this.db.collection('cds').doc(cd.id).set(myCd)
     }
@@ -78,7 +78,7 @@ export class CdsService {
     }
 
     getCdsByQueryString(queryString: string) {
-        if(queryString) {
+        if (queryString) {
             console.log(queryString)
             queryString = queryString.toLowerCase()
             console.log(queryString)
@@ -90,7 +90,7 @@ export class CdsService {
                 .subscribe(snaps => {
                     let cds: Cd[] = []
                     snaps.forEach((snap: any) => {
-    
+
                         console.log(snap.id);
                         console.log(snap.data())
                         cds.push({
@@ -100,15 +100,15 @@ export class CdsService {
                     });
                     console.log(cds);
                     this.selectedCds.emit(cds);
-    
+
                 })
         } else {
             return this.db.collection('cds')
-            .get()
-            .subscribe(snaps => {
-                let cds: Cd[] = []
+                .get()
+                .subscribe(snaps => {
+                    let cds: Cd[] = []
                     snaps.forEach((snap: any) => {
-    
+
                         console.log(snap.id);
                         console.log(snap.data())
                         cds.push({
@@ -118,7 +118,7 @@ export class CdsService {
                     });
                     console.log(cds);
                     this.selectedCds.emit(cds);
-            })
+                })
         }
     }
     getAllQueryOptions() {
@@ -127,18 +127,20 @@ export class CdsService {
             .get()
             .subscribe(snaps => {
                 snaps.forEach((snap => {
-                    
-                    const queryStrings: string[] = snap.data().queryStrings
-                    queryStrings.forEach((queryString: string) => {
-                        if(queryOptions.indexOf(queryString) == -1 ) {
-                            queryOptions.push(queryString)
-                        }
-                    })
+                    if (snap.data().queryStrings) {
+
+                        const queryStrings: string[] = snap.data().queryStrings
+                        queryStrings.forEach((queryString: string) => {
+                            if (queryOptions.indexOf(queryString) == -1) {
+                                queryOptions.push(queryString)
+                            }
+                        })
+                    }
                 }))
                 this.queryOptionsEmitter.emit(queryOptions);
             })
-            
-            
+
+
 
     }
 }

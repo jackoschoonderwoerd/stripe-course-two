@@ -17,7 +17,6 @@
                 font-weight: bold;
             }
             .add-cd-info-button {
-
             }
             .image-container {
                 .cd-cover {
@@ -104,6 +103,28 @@
                 }
             }
         }
+        .reviews {
+            padding: 1rem;
+            border: 1px solid black;
+            .header {
+                font-weight: bold;
+            }
+            .reviews-list {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                .review {
+                    .source_date {
+                        display: flex;
+                        gap: 1rem;
+                    }
+                    .content {
+                        padding: 0.5rem;
+                        background-color: #ccc;
+                    }
+                }
+            }
+        }
 
         .add-cd-to-db-button {
         }
@@ -112,15 +133,14 @@
     .forms {
         display: inline;
         add-cd-info {
-
         }
         add-tracks {
             border: 3px solid blue;
-            position:fixed;
+            position: fixed;
         }
         add-musician {
             border: 3px solid blue;
-            position:fixed;
+            position: fixed;
         }
     }
 }

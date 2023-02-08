@@ -11,6 +11,7 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 
 
 
+
 @Component({
     selector: 'add-cd',
     templateUrl: './add-cd.component.html',
@@ -23,6 +24,7 @@ export class AddCdComponent implements OnInit {
     editMode: boolean = false;
     addingTrack: boolean = false;
     addingMusician: boolean = false;
+    addingReview: boolean = false;
     addingInfo: boolean = false;
     exportCdToChild: Cd;
     exportCdToChildWithIndex: Object;
@@ -33,7 +35,8 @@ export class AddCdComponent implements OnInit {
     doomedNamesegments: string[] = [
         'van', 'de', 'der', 'op', 'ten', 'het', 'den', 'ter'
     ]
-    
+    queryStrings: string[] = []
+
     constructor(
         private dialog: MatDialog,
         private route: ActivatedRoute,
@@ -42,14 +45,17 @@ export class AddCdComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+
         const id: string = this.route.snapshot.paramMap.get('id');
-        if(id) {
+        if (id) {
             // EXISTING CD; DATA FROM DB
             this.cdId = id;
             this.editMode = true;
             this.cdsService.getCdById(id)
                 .then(cd => {
                     this.cd = cd;
+                    // this.cd.queryStrings = [];
+                    // this.cd.reviews = [];
                     console.log(this.cd)
                 })
                 .catch(err => console.log(err));
@@ -71,15 +77,17 @@ export class AddCdComponent implements OnInit {
                 },
                 tracks: [],
                 musicians: [],
-                queryStrings: []
+                queryStrings: [],
+                reviews: []
             }
         }
+
     }
 
-// ======= cdInfo ========
+    // ======= cdInfo ========
 
     onEditCdInfo() { // START EDITING CDINFO
-        if(this.cd) {
+        if (this.cd) {
             console.log(this.cd)
             // SEND CD TO CHILD
             this.exportCdToChild = this.cd;
@@ -88,24 +96,25 @@ export class AddCdComponent implements OnInit {
         this.addingInfo = true;
     }
 
-// ==========Track=============
- 
+    // ==========Track=============
+
     onAddTrack() {
         console.log('adding track');
-        if(this.cd) {
+        if (this.cd) {
             this.exportCdToChild = this.cd
             this.exportCdToChildWithIndex = null;
         }
         this.oneFormOpened = true;
-        this.addingTrack = true
+        this.addingTrack = true;
+        this.addingReview = false;
 
     }
 
     onEditTrack(index: number) {
         console.log('editing track');
-        if(this.cd) {
+        if (this.cd) {
             this.exportCdToChild = null;
-            this.exportCdToChildWithIndex = {cd: this.cd, index: index}
+            this.exportCdToChildWithIndex = { cd: this.cd, index: index }
         }
         this.oneFormOpened = true;
         this.addingTrack = true
@@ -113,32 +122,33 @@ export class AddCdComponent implements OnInit {
 
     onDeleteTrack(index) {
 
-        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {message: 'Are you sure'}})
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, { data: { message: 'Are you sure' } })
         dialogRef.afterClosed().subscribe(data => {
-            if(data) {
+            if (data) {
                 this.cd.tracks.splice(index, 1);
             }
         })
         return;
     }
 
-// ========== Musician ===============
+    // ========== Musician ===============
 
     onAddMusician() {
         this.oneFormOpened = true;
-        if(this.cd) {
+        if (this.cd) {
             this.exportCdToChild = this.cd;
             this.exportCdToChildWithIndex = null;
         }
         this.addingMusician = true;
         this.addingInfo = false;
         this.addingTrack = false;
+        this.addingReview = false;
     }
 
     onEditMusician(index: number) {
         this.oneFormOpened = true;
-        if(this.cd) {
-            this.exportCdToChildWithIndex = {cd: this.cd, index: index};
+        if (this.cd) {
+            this.exportCdToChildWithIndex = { cd: this.cd, index: index };
             this.exportCdToChild = null;
         }
         console.log(index);
@@ -146,15 +156,43 @@ export class AddCdComponent implements OnInit {
         this.exportMusicianIndex = index;
     }
 
-    onDeleteMusician(index){
-        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {message: 'Are you sure'}});
+    onDeleteMusician(index) {
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, { data: { message: 'Are you sure' } });
         dialogRef.afterClosed().subscribe(res => {
-            if(res) {
-                
+            if (res) {
+
                 this.cd.musicians.splice(index, 1);
             }
         })
         return;
+    }
+
+    // ========== Review ===============
+
+    onAddReview() {
+        if (this.cd) {
+            this.exportCdToChild = this.cd
+        }
+        this.oneFormOpened = true;
+        this.addingReview = true;
+        this.addingMusician = false;
+        this.addingInfo = false;
+        this.addingTrack = false;
+    }
+
+    onEditReview(index: number) {
+        this.oneFormOpened = true;
+        console.log(this.cd)
+        if (this.cd != undefined) {
+            this.exportCdToChildWithIndex = { cd: this.cd, index: index };
+            console.log(this.exportCdToChildWithIndex);
+            this.exportCdToChild = null
+            this.addingReview = true;
+        }
+    }
+
+    onDeleteReview(index) {
+        this.cd.reviews.splice(index, 1)
     }
 
     // ========= data from child component
@@ -167,27 +205,34 @@ export class AddCdComponent implements OnInit {
     onAddCdToDb() {
         console.log(this.cd);
         this.cd.musicians.forEach((musician) => {
-            this.cd.queryStrings.push(musician.name);
-            const nameSegments = musician.name.split(' ')
-            nameSegments.forEach((nameSegment: string) => {
-                console.log(nameSegment)
-                if((this.doomedNamesegments.indexOf(nameSegment) === -1)) {
-                    console.log(nameSegment);
-                    this.cd.queryStrings.push(nameSegment);
-                }
-            })
+            const name = musician.name.toLowerCase()
+            console.log(name);
+            this.cd.queryStrings.push(musician.name.toLowerCase());
+
+
+            // const nameSegments = musician.name.split(' ')
+            // nameSegments.forEach((nameSegment: string) => {
+            //     console.log(nameSegment)
+            //     if((this.doomedNamesegments.indexOf(nameSegment) === -1)) {
+            //         console.log(nameSegment);
+            //         this.cd.queryStrings.push(nameSegment);
+            //     }
+            // })
         })
-        if(this.editMode) {
+        this.cd.queryStrings.push(this.cd.cdInfo.bandName.toLowerCase());
+        this.cd.queryStrings.push(this.cd.cdInfo.title.toLowerCase());
+        console.log(this.cd.queryStrings);
+        if (this.editMode) {
             console.log('save edits', this.cd);
             this.cdsService.editCd(this.cd)
-            .then(res => {
-                console.log(res)
-                this.router.navigate(['cds']);
-                
-                this.clearAll()
+                .then(res => {
+                    console.log(res)
+                    this.router.navigate(['cds']);
 
-            })
-            .catch(err => console.log(err));
+                    this.clearAll()
+
+                })
+                .catch(err => console.log(err));
         } else {
             console.log('save new cd', this.cd)
             this.cdsService.addCd(this.cd)
@@ -202,23 +247,24 @@ export class AddCdComponent implements OnInit {
 
     onCancelAddCdToDb() {
         const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-            data: {message: 'Are you sure? this will clear the whole form!'}
+            data: { message: 'Are you sure? this will clear the whole form!' }
         });
         dialogRef.afterClosed().subscribe(res => {
-            if(res) {
+            if (res) {
                 // TODO CLEAR ALL FORMS
-               this.clearAll()
-                
+                this.clearAll()
+
             }
         })
     }
 
-    
+
     closeFormsInParent() {
         this.oneFormOpened = false;
         this.addingInfo = false;
         this.addingTrack = false;
         this.addingMusician = false;
+        this.addingReview = false;
     }
 
     private clearAll() {
@@ -226,7 +272,7 @@ export class AddCdComponent implements OnInit {
         this.router.navigate(['cds']);
     }
 
-       // importCdFromChild(cd: Cd) { // AFTER ADD-CDINFO, ADD-TRACKS OR ADD-MUSICIANS IS CLOSED 
+    // importCdFromChild(cd: Cd) { // AFTER ADD-CDINFO, ADD-TRACKS OR ADD-MUSICIANS IS CLOSED 
     //     if(cd) {
     //         console.log('cd from child: ', cd)
     //         this.cd = cd;

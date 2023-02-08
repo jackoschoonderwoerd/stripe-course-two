@@ -8,6 +8,7 @@ import { CdsMaterialModule } from './cds-material.module';
 import { CdDialogComponent } from './cd-dialog/cd-dialog.component';
 import { TwoDecimalPipe } from 'app/core/pipes/two-decimal.pipe';
 import { CapitalizeNamePipe } from 'app/core/pipes/capitalizeName.pipe';
+import { ReviewDialogComponent } from './cd-dialog/review-dialog/review-dialog.component';
 
 
 
@@ -16,7 +17,8 @@ import { CapitalizeNamePipe } from 'app/core/pipes/capitalizeName.pipe';
     CdsComponent,
     CdDialogComponent,
     TwoDecimalPipe,
-    CapitalizeNamePipe
+    CapitalizeNamePipe,
+    ReviewDialogComponent
    
   ],
   imports: [

@@ -1,5 +1,5 @@
 .page-container {
-    background-color: #ccc;;
+    background-color: var(--jazz-black);
     width: 100%;
     display: flex;
     justify-content: center;
@@ -7,15 +7,16 @@
         min-width: 320px;
         max-width: 500px;
         padding: 1rem;
-        background-color: #ccc;
+        background-color: var(--jazz-orange);
         .header {
             font-weight: bold;
             background-color: white;
             padding: 1rem;
             margin-bottom: 1rem;
+            background-color: var(--jazz-white);
         }
         .customer {
-            background-color: white;
+            background-color: var(--jazz-white);
             padding: 1rem;
             margin-bottom: 1rem;
             .customer-header {
@@ -23,18 +24,22 @@
             }
             .check-customer-info {
                 .check-customer-info-text {
-                    // color: red;
                 }
+            }
+            .update-customer {
+                background-color: var(--jazz-black);
+                color: var(--jazz-orange);
+                font-weight: bold;
             }
         }
         .empty {
-            background-color: white;
+            background-color: var(--jazz-white);
             padding: 1rem;
         }
         .cart-items {
             list-style: none;
 
-            background-color: white;
+            background-color: var(--jazz-white);
             padding: 1rem;
             .order-header {
                 font-weight: bold;
@@ -70,12 +75,20 @@
                 // border: 1px solid red;
                 margin-top: 0.5rem;
                 display: flex;
-                gap: 1rem;
+
                 .minus-one {
+                    margin-right: 1rem;
+                    color: var(--jazz-white);
                 }
                 .trash {
+                    margin-right: 1rem;
+                    background-color: var(--jazz-red);
+                    color: var(--jazz-white);
                 }
                 .plus-one {
+                    margin-right: 1rem;
+                    background-color: var(--jazz-green);
+                    color: var(--jazz-white);
                 }
             }
         }
@@ -92,9 +105,10 @@
                 .shipping-options {
                     // justify-content: center;
                     display: flex;
-                    gap: 1rem;
+
                     margin-bottom: 0.3rem;
                     .shipping-option-shipping {
+                        margin-right: 1rem;
                         font-weight: bold;
                     }
                     .shipping-option-pickup {
@@ -124,29 +138,41 @@
 
         .delivery_check_place-order {
             margin: 1rem 0;
-            background-color: white;
+            background-color: var(--jazz-white);
             padding: 1rem;
             margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            .place-order {
+                background-color: var(--jazz-black);
+                color: var(--jazz-orange);
+                font-weight: bold;
+            }
+            .order-more {
+                background-color: var(--jazz-black);
+                color: var(--jazz-orange);
+                font-weight: bold;
+            }
 
-            .delivery-container {
-                .delivery-radio-group {
-                    mat-radio-button {
-                        display: block;
-                    }
-                }
-                .delivery {
-                }
-            }
-            .check {
-                display: block;
-            }
+            // .delivery-container {
+            //     .delivery-radio-group {
+            //         mat-radio-button {
+            //             display: block;
+            //         }
+            //     }
+            //     .delivery {
+            //     }
+            // }
+            // .check {
+            //     display: block;
+            // }
         }
-        .sign-up-form {
-            max-width: 500px;
-            mat-form-field {
-                display: block;
-            }
-        }
+        // .sign-up-form {
+        //     max-width: 500px;
+        //     mat-form-field {
+        //         display: block;
+        //     }
+        // }
     }
 }
 .checked {
@@ -154,7 +180,12 @@
 }
 
 .checkbox-unchecked {
-    color: red;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--jazz-red);
+    // border: 2px solid var(--jazz-red);
+    // padding: 0.3rem;
+    // margin-bottom: 3rem;
 }
 .checkbox-checked {
     color: green;

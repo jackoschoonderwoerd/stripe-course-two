@@ -1,178 +1,184 @@
 <div class="page-container">
-    <div class="main-container">
-        <div class="header">check out</div>
+  <div class="main-container">
+    <div class="header">check out</div>
 
-        <div class="customer" *ngIf="(customer$|async) as customer">
-            <div class="customer-header">customer info</div>
-            <div class="full-name">
-                <span class="first-name">{{customer.firstName}}</span>&nbsp;
-                <span class="last-name">{{customer.lastName}}</span>
-            </div>
-            <div class="email">{{customer.email}}</div>
-            <div class="address">
-                <span class="street">{{customer.street}}</span>&nbsp;
-                <span class="house-number">{{customer.houseNumber}}</span>&nbsp;
-                <span *ngIf="customer.addition" class="addition">{{customer.addition}}</span>
-            </div>
-            <div class="city">{{customer.city}}</div>
-            <div class="country">{{customer.country}}</div>
-            <div class="orders">
-                <ul class="orders-list" *ngIf{{customer.orders> 0}}
-                    <li class="orders-list-item" *ngFor="let order of customer.orders">
-                        {{order|json}}
-                    </li>
-                </ul>
-            </div>
-            <mat-checkbox
-                style="display: block;"
-                class="check-customer-info"
-                [checked]="isCustomerInfoCheckboxChecked"
-                color="primary"
-                [ngStyle]="{color: getCustomerInfoCheckboxColor()}"
-                (change)="onCustomerInfoCheckboxChange($event)">
-                <span
-                    class="checkbox-unchecked"
-                    *ngIf="!isCustomerInfoCheckboxChecked">
-                    customer info checked</span>
-                <span
-                    class="checkbox-checked"
-                    *ngIf="isCustomerInfoCheckboxChecked">
-                    this information is correct</span>
-            </mat-checkbox>
-            <button
-                *ngIf="!isCustomerInfoCheckboxChecked"
-                class="update-customer"
-                mat-raised-button
-                (click)="onUpdateCustomer(customer)">
-                {{customer ? 'Update Customer' : 'Add Customer'}}
-            </button>
-        </div>
-
-        <div class="empty" *ngIf="cartItems.length == 0">Your cart is empty</div>
-
-        <div class="cart-items" *ngIf="cartItems.length > 0">
-            <div class="order-header">order</div>
-            <div class="cart-item" *ngFor="let cartItem of cartItems">
-                <!-- {{cartItem.cdInfo|json}} -->
-                <div class="band-name_title_price">
-                    <div class="band-name">{{cartItem.cd.cdInfo.bandName}}</div>
-                    <div class="title_price">
-                        <div class="title">{{cartItem.cd.cdInfo.title}}</div>
-                        <div class="price">{{cartItem.cd.cdInfo.price|currency:'EUR'}}</div>
-                    </div>
-                </div>
-                <div class="quantity_subtotal">
-                    <div class="quantity">
-                        <div class="quantity" *ngIf="cartItem.quantity > 1">Quantity: {{cartItem.quantity|number}}</div>
-                    </div>
-                    <div class="subtotal" *ngIf="cartItem.quantity > 1">Subtotal: {{cartItem.quantity *
-                        cartItem.cd.cdInfo.price|currency:'EUR'}}
-                    </div>
-                </div>
-                <div class="buttons">
-                    <button
-                        mat-mini-fab
-                        color="warn"
-                        *ngIf="cartItem.quantity == 1"
-                        class="minus-one"
-                        (click)="onMinusOne(cartItem.cd.id)">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                    <button
-                        mat-mini-fab color="primary"
-                        *ngIf="cartItem.quantity > 1"
-                        class="trash"
-                        (click)="onMinusOne(cartItem.cd.id)">
-                        <mat-icon>remove</mat-icon>
-                    </button>
-                    <button
-                        mat-mini-fab
-                        color="primary"
-                        class="plus-one"
-                        (click)="onPlusOne(cartItem.cd.id)">
-                        <mat-icon>add</mat-icon>
-                    </button>
-                </div>
-                <hr>
-            </div>
-            <div class="totals">
-                <div class="total-cds" *ngIf="totalCds > 0">
-                    <span>Total Cds:</span>
-                    <span>{{totalCds|currency:'EUR'}}</span>
-                </div>
-                <div class="shipping-options-radio">
-                    <mat-radio-group
-                        color="primary"
-                        class="shipping-options"
-                        (change)="onShippingOptionChange($event)">
-                        <mat-radio-button
-                            class="shipping-option-shipping"
-                            value="shipping"
-                            checked="true">
-                            <span>mail</span>
-                        </mat-radio-button>
-                        <mat-radio-button
-                            (click)="onPickUp()"
-                            class="shipping-option-pickup"
-                            value="pickUp">
-                            <span>pick up</span>
-                            <!-- <mat-icon>info</mat-icon> -->
-                        </mat-radio-button>
-                    </mat-radio-group>
-                </div>
-                <div class="shipping-costs">
-                    <span>Shipping Costs:</span>
-                    <span>{{shippingCosts|currency:'EUR'}}</span>
-                </div>
-                <hr>
-                <div class="total">
-                    <span>Total: </span>
-                    <span class="amount">{{(totalCds + shippingCosts)|currency:'EUR'}}</span>
-                </div>
-            </div>
-            <mat-checkbox
-                class="order-checkbox"
-                *ngIf="cartItems.length > 0"
-                color="primary"
-                class="check"
-                [checked]="isOrderCheckboxChecked"
-                (change)="onOrderCheckboxChange($event)">
-                <span
-                    class="checkbox-unchecked"
-                    *ngIf="!isOrderCheckboxChecked">
-                    info checked</span>
-                <span
-                    class="checkbox-checked"
-                    *ngIf="isOrderCheckboxChecked">
-                    this information is correct</span>
-            </mat-checkbox>
-        </div>
-
-
-
-
-
-
-
-        <div *ngIf="!(customer$|async)" class="log-in_sign-up">
-            <div class="new-customer">
-                <button color="primary" mat-raised-button (click)="toSignUp()">sign up</button>
-            </div>
-            <div class="existing-customer">
-                <button color="primary" mat-raised-button (click)="toLogIn()">log in</button>
-            </div>
-        </div>
-
-        <div *ngIf="customer$" class="delivery_check_place-order">
-            <button
-                class="place-order"
-                [disabled]="!isOrderCheckboxChecked || !isCustomerInfoCheckboxChecked"
-                *ngIf="cartItems.length > 0 && customer$|async"
-                mat-raised-button
-                (click)="onPlaceOrder()">
-                Place Order
-            </button>
-        </div>
-
+    <div class="customer" *ngIf="(customer$|async) as customer">
+      <div class="customer-header">customer info</div>
+      <div class="full-name">
+        <span class="first-name">{{customer.firstName}}</span>&nbsp;
+        <span class="last-name">{{customer.lastName}}</span>
+      </div>
+      <div class="email">{{customer.email}}</div>
+      <div class="address">
+        <span class="street">{{customer.street}}</span>&nbsp;
+        <span class="house-number">{{customer.houseNumber}}</span>&nbsp;
+        <span *ngIf="customer.addition" class="addition">{{customer.addition}}</span>
+      </div>
+      <div class="city">{{customer.zipCode}}&nbsp;{{customer.city}}</div>
+      <div class="country">{{customer.country}}</div>
+      <div class="orders">
+        <ul class="orders-list" *ngIf{{customer.orders> 0}}
+          <li class="orders-list-item" *ngFor="let order of customer.orders">
+          {{order|json}}
+          </li>
+        </ul>
+      </div>
+      <mat-checkbox
+        style="display: block;"
+        class="check-customer-info"
+        [checked]="isCustomerInfoCheckboxChecked"
+        color="primary"
+        [ngStyle]="{color: getCustomerInfoCheckboxColor()}"
+        (change)="onCustomerInfoCheckboxChange($event)">
+        <span
+          class="checkbox-unchecked"
+          *ngIf="!isCustomerInfoCheckboxChecked">
+          customer info checked</span>
+        <span
+          class="checkbox-checked"
+          *ngIf="isCustomerInfoCheckboxChecked">
+          this information is correct</span>
+      </mat-checkbox>
+      <button
+        *ngIf="!isCustomerInfoCheckboxChecked"
+        class="update-customer"
+        mat-raised-button
+        (click)="onUpdateCustomer(customer)">
+        {{customer ? 'Update Customer' : 'Add Customer'}}
+      </button>
     </div>
+
+    <div class="empty" *ngIf="cartItems.length == 0">Your cart is empty</div>
+
+    <div class="cart-items" *ngIf="cartItems.length > 0">
+      <div class="order-header">order</div>
+      <div class="cart-item" *ngFor="let cartItem of cartItems">
+        <!-- {{cartItem.cdInfo|json}} -->
+        <div class="band-name_title_price">
+          <div class="band-name">{{cartItem.cd.cdInfo.bandName}}</div>
+          <div class="title_price">
+            <div class="title">{{cartItem.cd.cdInfo.title}}</div>
+            <div class="price">{{cartItem.cd.cdInfo.price|currency:'EUR'}}</div>
+          </div>
+        </div>
+        <div class="quantity_subtotal">
+          <div class="quantity">
+            <div class="quantity" *ngIf="cartItem.quantity > 1">Quantity: {{cartItem.quantity|number}}</div>
+          </div>
+          <div class="subtotal" *ngIf="cartItem.quantity > 1">Subtotal: {{cartItem.quantity *
+                        cartItem.cd.cdInfo.price|currency:'EUR'}}
+          </div>
+        </div>
+        <div class="buttons">
+          <button
+            mat-mini-fab
+            color="warn"
+            *ngIf="cartItem.quantity == 1"
+            class="minus-one"
+            (click)="onMinusOne(cartItem.cd.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button
+            mat-mini-fab color="primary"
+            *ngIf="cartItem.quantity > 1"
+            class="trash"
+            (click)="onMinusOne(cartItem.cd.id)">
+            <mat-icon>remove</mat-icon>
+          </button>
+          <button
+            mat-mini-fab
+            color="primary"
+            class="plus-one"
+            (click)="onPlusOne(cartItem.cd.id)">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <hr>
+      </div>
+      <div class="totals">
+        <div class="total-cds" *ngIf="totalCds > 0">
+          <span>Total Cds:</span>
+          <span>{{totalCds|currency:'EUR'}}</span>
+        </div>
+        <div class="shipping-options-radio">
+          <mat-radio-group
+            color="primary"
+            class="shipping-options"
+            (change)="onShippingOptionChange($event)">
+            <mat-radio-button
+              class="shipping-option-shipping"
+              value="shipping"
+              checked="true">
+              <span>mail</span>
+            </mat-radio-button>
+            <mat-radio-button
+              (click)="onPickUp()"
+              class="shipping-option-pickup"
+              value="pickUp">
+              <span>pick up</span>
+              <!-- <mat-icon>info</mat-icon> -->
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="shipping-costs">
+          <span>Shipping Costs:</span>
+          <span>{{shippingCosts|currency:'EUR'}}</span>
+        </div>
+        <hr>
+        <div class="total">
+          <span>Total: </span>
+          <span class="amount">{{(totalCds + shippingCosts)|currency:'EUR'}}</span>
+        </div>
+      </div>
+      <mat-checkbox
+        class="order-checkbox"
+        *ngIf="cartItems.length > 0"
+        color="primary"
+        class="check"
+        [checked]="isOrderCheckboxChecked"
+        (change)="onOrderCheckboxChange($event)">
+        <span
+          class="checkbox-unchecked"
+          *ngIf="!isOrderCheckboxChecked">
+          order checked</span>
+        <span
+          class="checkbox-checked"
+          *ngIf="isOrderCheckboxChecked">
+          this information is correct</span>
+      </mat-checkbox>
+    </div>
+
+
+
+
+
+
+
+    <div *ngIf="!(customer$|async)" class="log-in_sign-up">
+      <div class="new-customer">
+        <button color="primary" mat-raised-button (click)="toSignUp()">sign up</button>
+      </div>
+      <div class="existing-customer">
+        <button color="primary" mat-raised-button (click)="toLogIn()">log in</button>
+      </div>
+    </div>
+
+    <div *ngIf="customer$" class="delivery_check_place-order">
+      <button
+        class="place-order"
+        [disabled]="!isOrderCheckboxChecked || !isCustomerInfoCheckboxChecked"
+        *ngIf="cartItems.length > 0 && customer$|async"
+        mat-raised-button
+        (click)="onPlaceOrder()">
+        Place Order
+      </button>
+      <button
+        class="order-more"
+        mat-raised-button
+        (click)="orderMore()">
+        Order More
+      </button>
+    </div>
+
+  </div>
 </div>

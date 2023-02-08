@@ -29,12 +29,13 @@ export class AddCdInfoComponent implements OnInit {
 
     ngOnInit(): void {
         console.log(this.importCdFromParent);
-        if(this.importCdFromParent.cdInfo.recordingDate) {
+        if (this.importCdFromParent.cdInfo.recordingDate) {
             const insertRecordingDate = new Date(this.importCdFromParent.cdInfo.recordingDate);
             console.log(insertRecordingDate);
         }
         this.initForm();
-        if(this.importCdFromParent.id != undefined) {
+
+        if (this.importCdFromParent.id != undefined) {
             console.log(this.importCdFromParent)
             this.editMode = true
             this.cd = this.importCdFromParent
@@ -52,33 +53,14 @@ export class AddCdInfoComponent implements OnInit {
                 price: this.cd.cdInfo.price
             })
         } else {
-            this.cd = {
-                cdInfo: {
-                    imageUrl: this.importCdFromParent.cdInfo.imageUrl,
-                    title: this.importCdFromParent.cdInfo.title,
-                    bandName: this.importCdFromParent.cdInfo.bandName,
-                    recordingStudio: this.importCdFromParent.cdInfo.recordingStudio,
-                    recordingEngineer: this.importCdFromParent.cdInfo.recordingEngineer,
-                    mixer: this.importCdFromParent.cdInfo.mixer,
-                    producer: this.importCdFromParent.cdInfo.producer,
-                    publisher: this.importCdFromParent.cdInfo.publisher,
-                    recordingDate: this.importCdFromParent.cdInfo.recordingDate,
-                    price: this.importCdFromParent.cdInfo.price,
-                },
-                tracks: [],
-                musicians: []
-            }
-            this.imageUrl = this.cd.cdInfo.imageUrl
-            // this.form.patchValue({
-            //     title: this.importCdFromParent.cdInfo.title,
-            //     price: this.importCdFromParent.cdInfo.price,
-            //     bandName: this.importCdFromParent.cdInfo.bandName
-            // })
+
+            // this.imageUrl = this.cd.cdInfo.imageUrl
+
         }
         console.log(this.cd);
     }
 
-    initForm():void {
+    initForm(): void {
         this.form = this.fb.group({
             title: new FormControl('', [Validators.required]),
             bandName: new FormControl('', [Validators.required]),
@@ -89,11 +71,11 @@ export class AddCdInfoComponent implements OnInit {
             publisher: new FormControl(null),
             recordingDate: new FormControl(null),
             price: new FormControl('', [Validators.required]),
-            
+
         })
     }
 
-    onFileInputChange(e: any):void {
+    onFileInputChange(e: any): void {
         const file = e.target.files[0];
         this.addCdService.uploadImageToBucket(file)
             .subscribe((imageUrl: string) => {
@@ -105,8 +87,10 @@ export class AddCdInfoComponent implements OnInit {
     onSubmit() {
         // console.log( new Date(this.form.value.recordingDate._d).getTime());
         this.cd.cdInfo = this.form.value;
-        if(this.cd.cdInfo.recordingDate) {
-            this.cd.cdInfo.recordingDate = new Date(this.form.value.recordingDate._d).getTime()
+        console.log(new Date(this.cd.cdInfo.recordingDate).getTime())
+        if (this.cd.cdInfo.recordingDate) {
+            console.log(this.cd.cdInfo.recordingDate)
+            this.cd.cdInfo.recordingDate = new Date(this.form.value.recordingDate).getTime()
         }
         this.cd.cdInfo.imageUrl = this.imageUrl;
         console.log(this.cd)
@@ -122,3 +106,4 @@ export class AddCdInfoComponent implements OnInit {
         return this.cd
     }
 }
+

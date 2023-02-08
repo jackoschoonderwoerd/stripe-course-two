@@ -1,40 +1,12 @@
-// import { Component, OnInit } from '@angular/core';
-// import { FormControl } from '@angular/forms';
-// import { Observable } from 'rxjs';
-// import { map, startWith } from 'rxjs/operators';
 
-// /**
-//  * @title Highlight the first autocomplete option
-//  */
-// @Component({
-//     selector: 'filter',
-//     templateUrl: './filter.component.html',
-//     styleUrls: ['./filter.component.scss']
-// })
-// export class FilterComponent implements OnInit {
-//     myControl = new FormControl();
-//     options: string[] = ['One', 'Two', 'Three'];
-//     filteredOptions: Observable<string[]>;
-
-//     ngOnInit() {
-//         this.filteredOptions = this.myControl.valueChanges.pipe(
-//             startWith(''),
-//             map(value => this._filter(value)),
-//         );
-//     }
-
-//     private _filter(value: string): string[] {
-//         const filterValue = value.toLowerCase();
-
-//         return this.options.filter(option => option.toLowerCase().includes(filterValue));
-//     }
-// }
 
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CdsService } from 'app/core/services/cds.service';
 import { Observable, of } from 'rxjs';
 import { map, startWith } from 'rxjs/operators'
+
+import { NavigationService } from '../navigation/navigation.service';
 
 @Component({
     selector: 'filter',
@@ -48,7 +20,7 @@ export class FilterComponent implements OnInit {
 
     queryOptions: string[] = []
     queryString: string;
-    form: FormGroup
+    form: FormGroup;
 
 
     myControl = new FormControl(null, Validators.required);
@@ -61,7 +33,9 @@ export class FilterComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
-        private cdsService: CdsService) { }
+        private cdsService: CdsService,
+
+        private navigationService: NavigationService) { }
 
     ngOnInit(): void {
         this.cdsService.getAllQueryOptions();
@@ -110,8 +84,9 @@ export class FilterComponent implements OnInit {
     }
 
     onCloseFilter() {
-        // this.closeFilter.emit();
-        // this.cdsService.filterClosedEmitter.emit()
+        this.closeFilter.emit();
+        this.cdsService.filterClosedEmitter.emit()
+        this.navigationService.filterSelected.emit(false)
     }
     onClearFilter() {
         // this.myControl.setValue(null);

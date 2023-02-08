@@ -1,22 +1,25 @@
 .cds {
     padding: 1rem;
-    background-color: white;
+    background-color: var(--jazz-orange);
     display: grid;
     grid-gap: 1rem;
 
     // width: 100%;
     // margin: 1rem;
     .cd {
-        background-color: #ccc;
+        border: 3px solid var(--jazz-black);
+        background-color: var(--jazz-green);
         padding: 1rem;
         // border: 3px solid #4287f5;
         justify-content: space-between;
         display: flex;
         flex-direction: column;
         .band-name {
+            background-color: var(--jazz-white);
+            border: 1px solid var(--jazz-black);
             padding: 0.3rem;
             font-size: 1.3rem;
-            background-color: white;
+
             margin-bottom: 0.3rem;
             border-radius: 5px;
         }
@@ -28,31 +31,37 @@
             }
         }
         .title {
-            padding: .3rem;            
+            border: 1px solid var(--jazz-black);
+            padding: 0.3rem;
             font-size: 1.3rem;
-            background-color: white;
-            margin-bottom: .5rem;
+            background-color: var(--jazz-white);
+            margin-bottom: 0.5rem;
             border-radius: 5px;
         }
-        .title_info_price_basket {
+        .title_info_price_cart {
             .title {
             }
-            .info_price_basket {
+            .info_price_cart {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 .info {
-                    border: 1px solid black;
+                    background-color: var(--jazz-black);
+                    color: var(--jazz-orange);
                 }
                 .price {
                     padding: 0.4rem;
                     border-radius: 5px;
-                    color: white;
-                    background-color: black;
+                    color: var(--jazz-black);
+                    background-color: var(--jazz-orange);
                     font-size: 1.3rem;
                 }
-                .basket {
-                    border: 1px solid black;
+                .cart {
+                    background-color: var(--jazz-black);
+                    color: var(--jazz-orange);
+                    i {
+                        font-size: 1.2rem;
+                    }
                 }
             }
             // border: 1px solid green;

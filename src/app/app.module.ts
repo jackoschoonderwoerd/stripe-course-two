@@ -36,6 +36,7 @@ import { FilterComponent } from './features/filter/filter.component';
 import { HomeComponent } from './features/home/home.component';
 import { DisclaimerComponent } from './disclaimer/disclaimer.component';
 import { FooterComponent } from './features/navigation/footer/footer.component';
+import { AddReviewComponent } from './features/add-cd/add-review/add-review.component';
 
 
 
@@ -61,6 +62,7 @@ import { FooterComponent } from './features/navigation/footer/footer.component';
     HomeComponent,
     DisclaimerComponent,
     FooterComponent,
+    AddReviewComponent,
     
 
 

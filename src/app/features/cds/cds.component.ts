@@ -25,7 +25,7 @@ export class CdsComponent implements OnInit, OnDestroy {
     queryOptions: string[] = [];
     showCovers: boolean = false;
     showList: boolean = true
-    
+
 
 
     constructor(
@@ -33,7 +33,7 @@ export class CdsComponent implements OnInit, OnDestroy {
         private router: Router,
         private afAuth: AngularFireAuth,
         private checkoutService: CheckoutService,
-        private authService: AuthService,
+        public authService: AuthService,
         private dialog: MatDialog,
         private navigationService: NavigationService
     ) { }
@@ -47,10 +47,10 @@ export class CdsComponent implements OnInit, OnDestroy {
             this.cds$ = this.cdsService.getCds();
         });
         this.cdsService.setViewTypeEmitter.subscribe((viewType: string) => {
-            if(viewType === 'covers') {
+            if (viewType === 'covers') {
                 this.showCovers = true;
                 this.showList = false
-            } else if(viewType === 'list') {
+            } else if (viewType === 'list') {
                 this.showCovers = false;
                 this.showList = true
             }
@@ -59,7 +59,7 @@ export class CdsComponent implements OnInit, OnDestroy {
 
 
         this.afAuth.user.subscribe(user => {
-            if(user) {
+            if (user) {
                 // console.log(user.uid);
                 if (user.uid === 'OsZTBYWyXnQQ7rzN0TIoAByDSCI3') {
                     this.isAdmin = true
@@ -88,9 +88,9 @@ export class CdsComponent implements OnInit, OnDestroy {
     }
 
     onDelete(id: string) {
-        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {message: 'Are you sure?'}});
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, { data: { message: 'Are you sure?' } });
         dialogRef.afterClosed().subscribe((data) => {
-            if(data) {
+            if (data) {
                 console.log(id);
                 this.cdsService.deleteCd(id)
             }
@@ -101,14 +101,15 @@ export class CdsComponent implements OnInit, OnDestroy {
     onAddNewCd() {
         this.router.navigate(['/cds/add-cd'])
     }
-    onAddCdToCart(cd) {
-        this.checkoutService.addCdToCart(cd)
+    onAddCdToCart(event, cd) {
+        this.checkoutService.addCdToCart(cd);
+        this.router.navigateByUrl('checkout')
     }
     onCdInfo(cd) {
         console.log(cd);
         this.dialog.open(CdDialogComponent, {
             width: '400px',
-            
+
             data: {
                 cd,
                 parent: 'cds',
@@ -116,8 +117,8 @@ export class CdsComponent implements OnInit, OnDestroy {
             },
             autoFocus: false,
             maxHeight: '90vh',
-            panelClass: 'dialog-container-custom'
-            
+            panelClass: 'custom-dialog-container'
+
         })
     }
     ngOnDestroy() {

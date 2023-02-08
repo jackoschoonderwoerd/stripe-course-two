@@ -1,41 +1,41 @@
 <div class="cds">
-    <div class="cd" *ngFor="let cd of cds$ | async">
-        <!-- <div class="id">
+  <div class="cd" *ngFor="let cd of cds$ | async">
+    <!-- <div class="id">
             <span>Id: </span>{{cd.id}}
         </div> -->
 
-        <div class="band-name">
-            <span *ngIf="cd">{{cd.cdInfo.bandName}}</span>
-        </div>
-        <div *ngIf="showCovers" class="image-container">
-            <img [src]="cd.cdInfo.imageUrl" alt="N.A." class="cd-cover">
-        </div>
-
-        <div class="title_info_price_basket">
-            <div class="title">
-                <span *ngIf="cd">{{cd.cdInfo.title}}</span>
-            </div>
-            <div class="info_price_basket">
-                <button class="info" mat-raised-button (click)="onCdInfo(cd)">
-                    <mat-icon>info</mat-icon>
-                </button>
-                <div class="price">
-                    <span *ngIf="cd">{{cd.cdInfo.price|currency:'EUR'}}</span>
-                </div>
-    
-                <button class="basket" mat-raised-button (click)="onAddCdToCart(cd)">
-                    <mat-icon>shopping_basket</mat-icon>
-                </button>
-            </div>
-        </div>
-
-
-        <div *ngIf="isAdmin" class="admin-buttons">
-            <button mat-raised-button (click)="onEdit(cd.id)">edit</button>
-            <button mat-raised-button (click)="onDelete(cd.id)">delete</button>
-        </div>
+    <div class="band-name">
+      <span *ngIf="cd">{{cd.cdInfo.bandName}}</span>
     </div>
-    <div class="cd" *ngIf="isAdmin">
-        <button mat-raised-button (click)="onAddNewCd()">add new cd</button>
+    <div *ngIf="showCovers" class="image-container">
+      <img [src]="cd.cdInfo.imageUrl" alt="N.A." class="cd-cover">
     </div>
+
+    <div class="title_info_price_cart">
+      <div class="title">
+        <span *ngIf="cd">{{cd.cdInfo.title}}</span>
+      </div>
+      <div class="info_price_cart">
+        <button class="info" mat-raised-button (click)="onCdInfo(cd)">
+          <mat-icon>info</mat-icon>
+        </button>
+        <div class="price">
+          <span *ngIf="cd">{{cd.cdInfo.price|currency:'EUR'}}</span>
+        </div>
+
+        <button class="cart" mat-raised-button (click)="onAddCdToCart($event, cd)">
+          <i class="fas fa-shopping-cart"></i>
+        </button>
+      </div>
+    </div>
+
+
+    <div *ngIf="authService.isAdmin$|async" class="admin-buttons">
+      <button mat-raised-button (click)="onEdit(cd.id)">edit</button>
+      <button mat-raised-button (click)="onDelete(cd.id)">delete</button>
+    </div>
+  </div>
+  <div class="cd" *ngIf="isAdmin">
+    <button mat-raised-button (click)="onAddNewCd()">add new cd</button>
+  </div>
 </div>

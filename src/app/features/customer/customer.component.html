@@ -1,83 +1,82 @@
 <div class="page-container">
 
 
-    <div class="customer-container">
-        <div class="customer-header">customer account</div>
-        <div class="customer-info" *ngIf="(customer$|async) as customer">
-            <div class="full-name">
-                <div class="first-name">{{customer.firstName}}</div>
-                <div class="last-name">{{customer.lastName}}</div>
-            </div>
-            <div class="email">{{customer.email}}</div>
-            <div class="address">
-                <div class="street">{{customer.street}}</div>
-                <div class="house-number">{{customer.houseNumber}}</div>
-                <div *ngIf="customer.addition" class="addition">{{customer.addition}}</div>
-            </div>
-            <div class="zip-code_city">
-                <div class="zip-code">{{customer.zipCode}}</div>
-                <div class="city">{{customer.city}}</div>
-            </div>
-            <div class="country">{{customer.country}}</div>
+  <div class="customer-container">
+    <div class="customer-header">customer account</div>
+    <div class="customer-info" *ngIf="(customer$|async) as customer">
+      <div class="full-name">
+        <div class="first-name">{{customer.firstName}}</div>
+        <div class="last-name">{{customer.lastName}}</div>
+      </div>
+      <div class="email">{{customer.email}}</div>
+      <div class="address">
+        <div class="street">{{customer.street}}</div>
+        <div class="house-number">{{customer.houseNumber}}</div>
+        <div *ngIf="customer.addition" class="addition">{{customer.addition}}</div>
+      </div>
+      <div class="zip-code_city">
+        <div class="zip-code">{{customer.zipCode}}</div>
+        <div class="city">{{customer.city}}</div>
+      </div>
+      <div class="country">{{customer.country}}</div>
 
-            <button
-                mat-raised-button
-                class="update-customer"
-                (click)="onUpdateCustomer(customer)">
-                {{customer ? 'Update Customer' : 'Add Customer'}}
-            </button>
-        </div>
-
-        <div class="orders-container" *ngIf="customer$|async">
-            <div class="order-header">order history</div>
-            <!-- {{(customer$|async)?.orders}} -->
-        </div>
-
-        <ul class="orders">
-            
-            <li class="order" *ngFor="let order of (customer$|async)?.orders">
-                <div class="condition" *ngIf="order.dateOrdered">
-                    <div class="date-ordered">
-                        {{order.dateOrdered|date}}
-                    </div>
-                    <div class="purchase-session-id">
-                        <!-- <span>PSId:</span>{{order.purchaseSessionId}} -->
-                    </div>
-                    <ul class="cds" *ngIf="order.purchaseSessionId">
-                        <li class="cd" *ngFor="let cd of order.cds">
-                            <div *ngIf="cd.title" class="condition"></div>
-                            <!-- <div class="id"><span>CDId:</span>{{cd.id}}</div> -->
-                            <div class="band-name_title_info">
-                                <div class="band-name">{{cd.bandName}}</div>
-                                <div class="title_info">
-                                    <div class="title">{{cd.title}}</div>
-                                    <mat-icon class="info" (click)="onCdInfo(cd)">info</mat-icon>
-                                </div>
-                            </div>
-                            <div class="quantity_price_sub-total">
-                                <div class="price">
-                                    <span>Price:</span>{{cd.price|currency:'EUR'}}
-                                </div>
-                                <div *ngIf="cd.quantity > 1" class="ordered-amount">
-                                    <span>Ordered Amount</span>{{cd.quantity}}X
-                                </div>
-                                <div class="subtotal" *ngIf="cd.quantity > 1">
-                                    <span>Subtotal:</span>{{(cd.quantity * cd.price)|currency:'EUR'}}
-                                </div>
-                            </div>
-                            <hr>
-                        </li>
-                        <li class="shipping-costs">
-                            <span>Shipping costs:</span>{{order.shippingCosts|currency:"EUR"}}
-                        </li>
-                        <hr>
-                    </ul>
-                    <div class="total">
-                        <span>Total: </span>{{order.grandTotal|currency:"EUR"}}
-                    </div>
-                </div>
-
-            </li>
-        </ul>
+      <button
+        mat-raised-button
+        class="update-customer"
+        (click)="onUpdateCustomer(customer)">
+        {{customer ? 'Update Customer' : 'Add Customer'}}
+      </button>
     </div>
+
+    <div class="orders-container" *ngIf="customer$|async">
+      <div class="order-header">order history</div>
+      <!-- {{(customer$|async)?.orders}} -->
+    </div>
+    <ul class="orders">
+
+      <li class="order" *ngFor="let order of (customer$|async)?.orders">
+        <div class="condition" *ngIf="order.dateOrdered">
+          <div class="date-ordered">
+            {{order.dateOrdered|date}}
+          </div>
+          <div class="purchase-session-id">
+            <!-- <span>PSId:</span>{{order.purchaseSessionId}} -->
+          </div>
+          <ul class="cds" *ngIf="order.purchaseSessionId">
+            <li class="cd" *ngFor="let cd of order.cds">
+              <div *ngIf="cd.title" class="condition"></div>
+              <!-- <div class="id"><span>CDId:</span>{{cd.id}}</div> -->
+              <div class="band-name_title_info">
+                <div class="band-name">{{cd.bandName}}</div>
+                <div class="title_info">
+                  <div class="title">{{cd.title}}</div>
+                  <mat-icon class="info" (click)="onCdInfo(cd)">info</mat-icon>
+                </div>
+              </div>
+              <div class="quantity_price_sub-total">
+                <div class="price">
+                  <span>Price:</span>{{cd.price|currency:'EUR'}}
+                </div>
+                <div *ngIf="cd.quantity > 1" class="ordered-amount">
+                  <span>Ordered Amount</span>{{cd.quantity}}X
+                </div>
+                <div class="subtotal" *ngIf="cd.quantity > 1">
+                  <span>Subtotal:</span>{{(cd.quantity * cd.price)|currency:'EUR'}}
+                </div>
+              </div>
+              <hr>
+            </li>
+            <li class="shipping-costs">
+              <span>Shipping costs:</span>{{order.shippingCosts|currency:"EUR"}}
+            </li>
+            <hr>
+          </ul>
+          <div class="total">
+            <span>Total: </span>{{order.grandTotal|currency:"EUR"}}
+          </div>
+        </div>
+
+      </li>
+    </ul>
+  </div>
 </div>

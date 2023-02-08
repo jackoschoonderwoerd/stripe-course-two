@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
         private authService: AuthService,
         private cdsService: CdsService,
         private navigationService: NavigationService,
-        ) { }
+    ) { }
 
 
     cartItemsLength: number = 0;
@@ -34,11 +34,15 @@ export class HeaderComponent implements OnInit {
     viewList: boolean = true;
     filterActive: boolean = false;
     cdsViewOptionsVisible: boolean = false;
+    cartSelected: boolean = false;
+
 
 
     ngOnInit(): void {
-        
-        if(window.location.pathname === '/cds') {
+        this.navigationService.filterSelected.subscribe((status: boolean) => {
+            this.filterActive = status
+        })
+        if (window.location.pathname === '/cds') {
             console.log(window.location.pathname);
             this.cdsViewOptionsVisible = true;
         } else {
@@ -71,6 +75,7 @@ export class HeaderComponent implements OnInit {
 
     cdsSelected() {
         this.cdsViewOptionsVisible = true;
+        this.cartSelected = false
     }
 
     onFilter() {
@@ -81,14 +86,14 @@ export class HeaderComponent implements OnInit {
     }
     onViewType(viewType: string) {
         console.log(viewType)
-        if(viewType === 'covers') {
+        if (viewType === 'covers') {
             this.viewCovers = true;
             this.viewList = false;
-        } else if(viewType === 'list') {
+        } else if (viewType === 'list') {
             this.viewCovers = false;
             this.viewList = true;
         }
-        
+
         this.cdsService.setViewType(viewType)
     }
     onLogOut() {
@@ -103,26 +108,29 @@ export class HeaderComponent implements OnInit {
         }
     }
 
-    onShoppingBasket(e) {
+    onCart(e) {
         console.log(e.target.outerText);
         this.checkLinkIfCds(e)
         // this.navigationService.cdsViewOptionsVisible.emit(false);
-        this.navigationService.showFilter.emit(false)
+        this.navigationService.showFilter.emit(false);
+        this.cartSelected = true;
     }
 
     onAccount(e) {
         this.checkLinkIfCds(e)
         this.navigationService.showFilter.emit(false);
+        this.cartSelected = false;
     }
 
     onHome(e) {
         this.checkLinkIfCds(e)
         this.navigationService.showFilter.emit(false);
+        this.cartSelected = false
     }
 
     checkLinkIfCds(e) {
         console.log(e.target.outerText);
-        if(e.target.outerText.toLowerCase() === 'cds') {
+        if (e.target.outerText.toLowerCase() === 'cds') {
             this.cdsViewOptionsVisible = true;
         } else {
             this.cdsViewOptionsVisible = false;
