@@ -2,13 +2,16 @@
   <div class="cd">
     <div class="cd-info">
       <div class="header">cd info</div>
-      <button
-        class="add-cd-info-button"
+      <button class="add-cd-info-button"
         *ngIf="!cd"
         (click)="onAddCdInfo()">add cd info</button>
-      <div class="cdId" *ngIf="cdId">{{cdId}}</div>
-      <div *ngIf="cd" class="image-container">
-        <img class="cd-cover" [src]="cd.cdInfo.imageUrl" alt="">
+      <div class="cdId"
+        *ngIf="cdId">{{cdId}}</div>
+      <div *ngIf="cd"
+        class="image-container">
+        <img class="cd-cover"
+          [src]="cd.cdInfo.imageUrl"
+          alt="">
       </div>
       <div class="title">Title: <span *ngIf="cd">{{cd.cdInfo.title}}</span></div>
       <div class="band-name">Band: <span *ngIf="cd">{{cd.cdInfo.bandName}}</span></div>
@@ -19,7 +22,8 @@
       <div class="publisher">Publisher: <span *ngIf="cd">{{cd.cdInfo.publisher}}</span></div>
       <div class="recordingDate">Recording date: <span *ngIf="cd">{{cd.cdInfo.recordingDate | date}}</span></div>
       <div class="price">Price: <span *ngIf="cd">{{cd.cdInfo.price|currency:"EUR"}}</span></div>
-      <button class="edit-cd-info" *ngIf="!oneFormOpened"
+      <button class="edit-cd-info"
+        *ngIf="!oneFormOpened"
         (click)="onEditCdInfo(cdInfo)">{{editMode ? 'edit cd info': 'add cd info' }}</button>
 
     </div>
@@ -41,41 +45,54 @@
             <span>:</span>
             <div class="seconds">{{track.seconds}}</div>
           </div>
-          <div *ngIf="!oneFormOpened" class="edit_delete">
-            <button class="edit-track" (click)="onEditTrack(i)">edit track</button>
-            <button class="delete-track" (click)="onDeleteTrack(i)">delete track</button>
+          <div *ngIf="!oneFormOpened"
+            class="edit_delete">
+            <button class="edit-track"
+              (click)="onEditTrack(i)">edit track</button>
+            <button class="delete-track"
+              (click)="onDeleteTrack(i)">delete track</button>
           </div>
         </li>
       </ul>
-      <button *ngIf="!oneFormOpened" (click)="onAddTrack()">add track</button>
+      <button *ngIf="!oneFormOpened"
+        (click)="onAddTrack()">add track</button>
     </div>
 
     <div class="musicians">
       <hr>
       <div class="header">musicians</div>
-      <ul class="musicians-list" *ngIf="cd">
-        <li class="musicians-list-item" *ngFor="let musician of cd.musicians; let i = index">
-          <div class="icons" *ngIf="!oneFormOpened">
-            <button class="musicians-delete" (click)="onDeleteMusician(i)">delete musician</button>
-            <button class="musicians-edit" (click)="onEditMusician(i)">edit musician</button>
+      <ul class="musicians-list"
+        *ngIf="cd">
+        <li class="musicians-list-item"
+          *ngFor="let musician of cd.musicians; let i = index">
+          <div class="icons"
+            *ngIf="!oneFormOpened">
+            <button class="musicians-delete"
+              (click)="onDeleteMusician(i)">delete musician</button>
+            <button class="musicians-edit"
+              (click)="onEditMusician(i)">edit musician</button>
           </div>
           <div class="name">Name: {{musician.name}}</div>
           <ul class="instrument-list">
             Instr:
-            <li class="instrument-list-item" *ngFor="let instrument of musician.instruments">
+            <li class="instrument-list-item"
+              *ngFor="let instrument of musician.instruments">
               {{instrument}}
             </li>
           </ul>
           <hr>
         </li>
       </ul>
-      <button *ngIf="!oneFormOpened" (click)="onAddMusician()">add musician</button>
+      <button *ngIf="!oneFormOpened"
+        (click)="onAddMusician()">add musician</button>
     </div>
 
     <div class="reviews">
       <div class="header">reviews</div>
-      <ul class="reviews-list" *ngIf="cd">
-        <li class="review" *ngFor="let review of cd.reviews; let i = index">
+      <ul class="reviews-list"
+        *ngIf="cd">
+        <li class="review"
+          *ngFor="let review of cd.reviews; let i = index">
           <div class="source_date">
             <div class="source">{{review.source}}</div>
             <div class="date">{{review.date|date}}</div>
@@ -90,16 +107,15 @@
       <button (click)="onAddReview()">add review</button>
     </div>
 
-    <div class="final-buttons" *ngIf="!oneFormOpened">
+    <div class="final-buttons"
+      *ngIf="!oneFormOpened">
 
-      <button
-        mat-raised-button
+      <button mat-raised-button
         class="add-cd-to-db-button"
         (click)="onAddCdToDb()">
         {{editMode ? 'save edits' : 'add cd'}}
       </button>
-      <button
-        mat-raised-button
+      <button mat-raised-button
         class="add-cd-to-db-button"
         (click)="onCancelAddCdToDb()">
         cancel
@@ -108,25 +124,21 @@
   </div>
 
   <div class="forms">
-    <add-cd-info
-      [importCdFromParent]="exportCdToChild"
+    <add-cd-info [importCdFromParent]="exportCdToChild"
       (exportToParent)="importCdInfoFromChild($event)"
       (closeForms)="closeFormsInParent()"
       *ngIf="addingInfo"></add-cd-info>
-    <add-tracks
-      [importCdFromParent]="exportCdToChild"
+    <add-tracks [importCdFromParent]="exportCdToChild"
       [importCdAndIndexFromParent]="exportCdToChildWithIndex"
       (closeForms)="closeFormsInParent()"
       *ngIf="addingTrack"></add-tracks>
     <!-- <add-tracks [exportTrackIndex]="importTrackIndex" *ngIf="addingTrack"></add-tracks> -->
-    <add-musician
-      [importCdFromParent]="exportCdToChild"
+    <add-musician [importCdFromParent]="exportCdToChild"
       [importCdAndIndexFromParent]="exportCdToChildWithIndex"
       (closeForms)="closeFormsInParent()"
       *ngIf="addingMusician">
     </add-musician>
-    <add-review
-      [importedCdFromParent]="exportCdToChild"
+    <add-review [importedCdFromParent]="exportCdToChild"
       [importCdAndIndexFromParent]="exportCdToChildWithIndex"
       (closeForms)="closeFormsInParent()"
       *ngIf="addingReview">
